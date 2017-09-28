@@ -4,19 +4,35 @@
              x:Class="iab330.Views.ManageBoxScreen"
              Title="Manage Boxes">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
+        <StackLayout BackgroundColor="White" x:Name="manageBoxLayout">
             <Label Text="Add new boxes here:" />
             <Entry x:Name="boxName"
                        Placeholder="Enter Box Name Here" />
             <Label Text="Room Type:" />
-            <Picker x:Name="roomType" Title="Select Room Type">
+            <Picker x:Name="roomType" Title="Select Room Type" ItemsSource="{Binding Rooms}" SelectedItem="{Binding Rooms}" ItemDisplayBinding="{Binding Name}">
                 <Picker.Items>
-                    <x:String></x:String>
+                
                 </Picker.Items>
             </Picker>
-            <Button x:Name="submitBox" 
+            <Button x:Name="createBox" 
                         WidthRequest="100"
-                        Text="Submit"/>
+                        Text="Submit"
+                    Clicked="createBox_Clicked"/>
+            <StackLayout x:Name="errors">
+                
+            </StackLayout>
+            <ListView x:Name="boxList" ItemsSource="{Binding Path=Boxes}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Vertical">
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding RoomName}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

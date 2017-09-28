@@ -9,12 +9,13 @@ namespace iab330 {
     public partial class App : Application {
 
         static RoomDataAccess roomDataAccess;
+        static BoxDataAccess boxDataAccess;
         static ItemDataAccess itemDataAccess;
 
         public App() {
             InitializeComponent();
-            //SetMainPage();
-
+            itemDataAccess = new ItemDataAccess();
+            itemDataAccess.DeleteAllItem();
             this.MainPage = new NavigationPage(new HomePage())
             {
                 BarBackgroundColor = Color.DarkGray,
@@ -22,7 +23,7 @@ namespace iab330 {
             };
         }
 
-        public static ItemDataAccess ItemAccess {
+        public static ItemDataAccess ItemDataAccess {
             get {
                 if (itemDataAccess == null) {
                     itemDataAccess = new ItemDataAccess();
@@ -31,7 +32,16 @@ namespace iab330 {
             }
         }
 
-        public static RoomDataAccess RoomAccess {
+        public static BoxDataAccess BoxDataAccess {
+            get {
+                if (boxDataAccess == null) {
+                    boxDataAccess = new BoxDataAccess();
+                }
+                return boxDataAccess;
+            }
+        }
+
+        public static RoomDataAccess RoomDataAccess {
             get {
                 if (roomDataAccess == null) {
                     roomDataAccess = new RoomDataAccess();
@@ -44,6 +54,11 @@ namespace iab330 {
             Current.MainPage = new HomePage {
 
             };
+        }
+
+        public void OnPause() {
+            //roomDataAccess.SaveAllRooms(); //Make sure to save all data before pausing
+
         }
     }
 }

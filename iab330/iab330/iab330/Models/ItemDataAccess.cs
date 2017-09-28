@@ -1,6 +1,7 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,24 +11,41 @@ namespace iab330.Models {
     public class ItemDataAccess {
         private SQLiteConnection database;
         private static object collisionLock = new object();
-
+        public ObservableCollection<Item> Items { get; set; }
         public ItemDataAccess() {
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<Item>();
-            if (!database.Table<Item>().Any()) { //if table is empty
+            this.Items = new ObservableCollection<Item>(database.Table<Item>());
+        }
 
-                var newItem1 = new Item() {
-                    Name = "MySecondItem",
-                    Quantity = 1,
-                };
-                App.ItemAccess.SaveItem(newItem1);
+        public void AddNewItem(Item itemInstance) {
+            this.Items.Add(itemInstance);
+        }
 
+        public IEnumerable<Item> GetObservableItem(int id) {
+            return this.Items.Where(item => item.Id == id);
+        }
+
+
+        public IEnumerable<Item> GetObservableItem(string name) {
+            return this.Items.Where(item => item.Name == name);
+        }
+
+        public List<Item> searchItem(string query) {
+            lock (collisionLock) {
+                return database.Query<Item>("SELECT * FROM [Item] where name LIKE ?", "%"+query+"%");
             }
         }
 
         public List<Item> GetItem(int id) {
             lock (collisionLock) {
-                return database.Query<Item>("SELECT * FROM [Item] where id = id");
+                return database.Query<Item>("SELECT * FROM [Item] where id = ?", id);
+            }
+        }
+
+        public List<Item> GetItem(string name) {
+            lock (collisionLock) {
+                return database.Query<Item>("SELECT * FROM [Item] where name = ?", name);
             }
         }
 
@@ -51,10 +69,37 @@ namespace iab330.Models {
                 }
             }
         }
+        public void SaveAllItems() {
+            lock (collisionLock) {
+                foreach (var itemInstance in this.Items) {
+                    if (itemInstance.Id != 0) {
+                        database.Update(itemInstance);
+                    } else {
+                        database.Insert(itemInstance);
+                    }
+                }
+            }
+        }
 
         public int DeleteItem(Item itemInstance) {
             var id = itemInstance.Id;
-            return database.Delete<Item>(id);
+            if (id != 0) {
+                lock (collisionLock) {
+                    return database.Delete<Item>(id);
+                }
+            }
+            this.Items.Remove(itemInstance);
+            return id;
         }
+
+        public void DeleteAllItem() {
+            lock (collisionLock) {
+                database.DropTable<Item>();
+                database.CreateTable<Item>();
+            }
+            this.Items = null;
+            this.Items = new ObservableCollection<Item>(database.Table<Item>());
+        }
+
     }
 }

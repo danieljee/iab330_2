@@ -15,8 +15,38 @@ namespace iab330.Views
         public ManageBoxScreen()
         {
             InitializeComponent();
-            var roomList = App.RoomAccess.GetAllRooms();
-            roomType.ItemsSource = roomList;
+        }
+
+
+        protected override void OnAppearing() {
+            base.OnAppearing();
+            roomType.BindingContext = App.RoomDataAccess;
+            boxList.BindingContext = App.BoxDataAccess;
+        }
+
+        private void createBox_Clicked(object sender, EventArgs e) {
+            errors.Children.Clear();
+            if (roomType.SelectedIndex < 0) {//If no room is selected
+                var newLabel = new Label();
+                newLabel.Text = "Please choose a room";
+                errors.Children.Add(newLabel);
+                return;
+            } else if (String.IsNullOrEmpty(boxName.Text)) { //If name field is empty
+                System.Diagnostics.Debug.WriteLine("boxName empty");
+                var newLabel = new Label();
+                newLabel.Text = "Please enter the box name";
+                errors.Children.Add(newLabel);
+                return;
+            } 
+            var room = App.RoomDataAccess.GetRoom(roomType.Items[roomType.SelectedIndex])[0]; //Get the room from db.
+            var newBox = new Box {
+                Name = boxName.Text,
+                RoomId = room.Id,
+                RoomName = room.Name
+            };
+            App.BoxDataAccess.AddNewBox(newBox);
+            App.BoxDataAccess.SaveBox(newBox);
+      
         }
     }
 }

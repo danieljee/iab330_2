@@ -9,12 +9,12 @@
             <StackLayout x:Name="errors">
                 
             </StackLayout>
-            <ListView x:Name="roomsView">
+            <ListView x:Name="roomsView" ItemsSource="{Binding Path=Rooms}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Vertical">
-                                <Entry Text="{Binding Name}"/>
+                                <Label Text="{Binding Name}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

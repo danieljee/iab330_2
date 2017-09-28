@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iab330.Views.AddItem">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry x:Name="itemName" Placeholder="Item Name"/>
+            <Entry x:Name="quantity" Placeholder="Quantity"/>
+            <Picker x:Name="boxes" Title="Select Box" ItemsSource="{Binding Boxes}" ItemDisplayBinding="{Binding Name}">
+                <Picker.Items>
+                </Picker.Items>
+            </Picker>
+            <Button x:Name="addItemButton" Text="Add" Clicked="addItemButton_Clicked"/>
+            <Label x:Name="error" Text=""></Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

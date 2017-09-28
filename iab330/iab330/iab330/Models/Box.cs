@@ -37,8 +37,28 @@ namespace iab330 {
         //[OneToMany(CascadeOperations = CascadeOperation.All)]
         //public List<Item> Items { get; set; }
 
-        //private int _roomId;
-        //[]
+        private int _roomId;
+        public int RoomId {
+            get {
+                return _roomId;
+            }
+            set {
+                this._roomId = value;
+                OnPropertyChanged(nameof(RoomId));
+            }
+        }
+
+        private string _roomName;
+        public string RoomName {
+            get {
+                return _roomName;
+            }
+            set {
+                this._roomName = value;
+                OnPropertyChanged(nameof(RoomName));
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName) {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

@@ -15,8 +15,35 @@ namespace iab330.Views
 		public SearchPage ()
 		{
 			InitializeComponent ();
+            searchResult.BindingContext = App.ItemDataAccess;
+        }
 
-            var list = App.ItemAccess.GetAllItems();
-		}
-	}
+        protected override void OnAppearing() {
+            base.OnAppearing();
+            searchCriteria.SelectedIndex = 2;
+        }
+
+
+
+        private void AddButton_Clicked(object sender, EventArgs e) {
+            Navigation.PushAsync(new AddItem());
+        }
+
+        private void SearchButton_Clicked(object sender, EventArgs e) {
+            var query = searchQuery.Text;
+            var criteria = searchCriteria.Items[searchCriteria.SelectedIndex];
+            switch (criteria) {
+                case "Room":
+    
+                    break;
+                case "Box":
+                    break;
+                case "Item":
+                    searchResult.ItemsSource = App.ItemDataAccess.searchItem(query);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }

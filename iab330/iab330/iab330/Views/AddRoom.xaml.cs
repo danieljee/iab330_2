@@ -15,20 +15,29 @@ namespace iab330.Views
 		public AddRoom ()
 		{
 			InitializeComponent ();
-            var roomList = App.RoomAccess.GetAllRooms();
-            roomsView.ItemsSource = roomList;
+            //var roomList = App.RoomAccess.GetAllRooms();
+            //roomsView.ItemsSource = roomList;
+        }
 
+        protected override void OnAppearing() {
+            base.OnAppearing();
+            this.BindingContext = App.RoomDataAccess;
         }
 
         private void addRoomButton_Clicked(object sender, EventArgs e) {
-            if (App.RoomAccess.GetRoom(roomName.Text).Count == 0) {
-                var newRoom = new Room {
+            errors.Children.Clear();
+            var rooms = App.RoomDataAccess.GetObservableRoom(roomName.Text);
+            if (String.IsNullOrEmpty(roomName.Text)) {
+                var error = new Label();
+                error.Text = "Please enter a name";
+                errors.Children.Add(error);
+            } else if (!rooms.Any()) {
+                var newRoom  = new Room {
                     Name = roomName.Text
                 };
 
-                App.RoomAccess.SaveRoom(newRoom);
-                var roomList = App.RoomAccess.GetAllRooms();
-                roomsView.ItemsSource = roomList;
+                App.RoomDataAccess.AddNewRoom(newRoom);
+                App.RoomDataAccess.SaveRoom(newRoom);//Remove this later when OnPause save function is implemented
             } else {
                 var error = new Label();
                 error.Text = "Room Already Exists";

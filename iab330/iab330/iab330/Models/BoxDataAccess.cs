@@ -12,35 +12,42 @@ namespace iab330 {
         private SQLiteConnection database;
         private static object collisionLock = new object();
 
-        //expose data for xaml files to allow data binding.
-        //ObservableCollection has built-in support for change notification
-        //While doing crud operations, ObservableCollection can contain
-        //both objects retrieved from the database and new objects added
-        //via the UI that haven't been saved yet, or pending edits over 
-        //existing objects
-        //public ObservableCollection<Box> Boxes { get; set; }
+        public ObservableCollection<Box> Boxes { get; set; }
 
         public BoxDataAccess() {
-            //returns platform specific implementation of new SQLiteConnection(path)
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<Box>();
-            //this.Boxes = new ObservableCollection<Box>(database.Table<Box>());
-
-            //if (!database.Table<Box>().Any()) { //if table is empty
-            //    AddNewBox("First Box!");
-            //}
+            this.Boxes = new ObservableCollection<Box>(database.Table<Box>());
         }
 
-        //public void AddNewBox(string name) {
-        //    this.Boxes.Add(
-        //        new Box {
-        //            Name = name
-        //        });
-        //}
+        public void AddNewBox(Box boxInstance) {
+            this.Boxes.Add(boxInstance);
+        }
+
+        public IEnumerable<Box> GetObservableBox(int id) {
+            return this.Boxes.Where(box => box.Id == id);
+        }
+
+
+        public IEnumerable<Box> GetObservableBox(string name) {
+            return this.Boxes.Where(box => box.Name == name);
+        }
+
+        public List<Box> SearchBox(string query) {
+            lock (collisionLock) {
+                return database.Query<Box>("SELECT * FROM [Box] where name LIKE ?", "%" + query + "%");
+            }
+        }
 
         public List<Box> GetBox(int id) {
             lock (collisionLock) {
-                return database.Query<Box>("SELECT * FROM [Box] where id = id");
+                return database.Query<Box>("SELECT * FROM [Box] where id = ?", id);
+            }
+        }
+
+        public List<Box> GetBox(string name) {
+            lock (collisionLock) {
+                return database.Query<Box>("SELECT * FROM [Box] where name = ?", name);
             }
         }
 
@@ -65,28 +72,27 @@ namespace iab330 {
             }
         }
 
-        //public void SaveAllBoxes() {
-        //    lock (collisionLock) {
-        //        foreach (var boxInstance in this.Boxes) {
-        //            if (boxInstance.Id != 0) {
-        //                database.Update(boxInstance);
-        //            } else {
-        //                database.Insert(boxInstance);
-        //            }
-        //        }
-        //    }
-        //}
+        public void SaveAllBoxes() {
+            lock (collisionLock) {
+                foreach (var boxInstance in this.Boxes) {
+                    if (boxInstance.Id != 0) {
+                        database.Update(boxInstance);
+                    } else {
+                        database.Insert(boxInstance);
+                    }
+                }
+            }
+        }
 
         public int DeleteBox(Box boxInstance) {
             var id = boxInstance.Id;
-            return database.Delete<Box>(id);
-            //if (id != 0) {
-            //    lock (collisionLock) {
-            //        return database.Delete<Box>(id);
-            //    }
-            //}
-            //this.Boxes.Remove(boxInstance);
-            //return id;
+            if (id != 0) {
+                lock (collisionLock) {
+                    return database.Delete<Box>(id);
+                }
+            }
+            this.Boxes.Remove(boxInstance);
+            return id;
         }
 
         public void DeleteAllBoxes() {
@@ -94,8 +100,8 @@ namespace iab330 {
                 database.DropTable<Box>();
                 database.CreateTable<Box>();
             }
-            //this.Boxes = null;
-            //this.Boxes = new ObservableCollection<Box>(database.Table<Box>());
+            this.Boxes = null;
+            this.Boxes = new ObservableCollection<Box>(database.Table<Box>());
         }
     }
 }

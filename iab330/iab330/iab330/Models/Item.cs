@@ -45,7 +45,27 @@ namespace iab330.Models {
         }
 
         //[ForeignKey(typeof(Box))]
-        //public int BoxId { get; set; }
+        private int _boxId;
+        public int BoxId {
+            get {
+                return _boxId;
+            }
+            set {
+                this._boxId = value;
+                OnPropertyChanged(nameof(BoxId));
+            }
+        }
+
+        private string _boxName;
+        public string BoxName {
+            get {
+                return _boxName;
+            }
+            set {
+                this._boxName = value;
+                OnPropertyChanged(nameof(BoxName));
+            }
+        }
 
         //[ManyToOne]
         //public Box Box { get; set; }
