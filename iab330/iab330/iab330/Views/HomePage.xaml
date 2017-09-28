@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iab330.Views.HomePage"
+             Title="Where's My Stuff?">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <Button x:Name= "manageBoxesButton" 
+                    Text="Manage Boxes"
+                    FontSize="20"
+                    HeightRequest="100"
+                    WidthRequest="300"
+                    Image="box_icon.png"
+                    BackgroundColor="SkyBlue"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand" 
+                    Clicked="manageBoxesButton_Clicked"/>
+            <Button x:Name= "addItemButton" 
+                    Text="Quick Add/Remove Item"
+                    FontSize="20"
+                    BackgroundColor="Orange"
+                    Image="box_icon.png"
+                    HeightRequest="100"
+                    WidthRequest="300"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="addItemButton_Clicked"/>
+            <Button x:Name= "searchButton" 
+                    Text="Quick Search"
+                    Image="box_icon.png"
+                    BackgroundColor="Coral"
+                    FontSize="20"
+                    HeightRequest="100"
+                    WidthRequest="300"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="searchButton_Clicked"/>
+            <Button x:Name= "helpButton" 
+                    Text="Help"
+                    Image="box_icon.png"
+                    FontSize="20"
+                    HeightRequest="100"
+                    WidthRequest="300"
+                    BackgroundColor="IndianRed"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    Clicked="helpButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

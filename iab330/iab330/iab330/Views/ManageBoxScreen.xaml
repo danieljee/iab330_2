@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iab330.Views.ManageBoxScreen"
+             Title="Manage Boxes">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <Label Text="Add new boxes here:" />
+            <Entry x:Name="boxName"
+                       Placeholder="Enter Box Name Here" />
+            <Label Text="Room Type:" />
+            <Picker x:Name="roomType" Title="Select Room Type">
+                <Picker.Items>
+                    <x:String>Bedroom</x:String>
+                    <x:String>Dining</x:String>
+                    <x:String>Living</x:String>
+                    <x:String>Storage</x:String>
+                </Picker.Items>
+            </Picker>
+            <Button x:Name="submitBox" 
+                        WidthRequest="100"
+                        Text="Submit"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="iab330.Views.QuickAddPage"
+             Title="Quick Add/Remove Item">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <Picker x:Name="actionSelector" Title="Select Add or Remove Item">
+                <Picker.Items>
+                    <x:String>Add Item</x:String>
+                    <x:String>Remove Item</x:String>
+                </Picker.Items>
+            </Picker>
+            <Entry x:Name="boxID" Placeholder="Enter Box's Name" />
+            <Entry x:Name="itemName" Placeholder="Enter Item's Name"/>
+            <Button x:Name="confirmAction" Text="Submit"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
