@@ -36,5 +36,9 @@ namespace iab330.Views
         {
             Navigation.PushAsync(new HelpScreen());
         }
+
+        private void addRoomButton_Clicked(object sender, EventArgs e) {
+            Navigation.PushAsync(new AddRoom());
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace iab330.Views
         public ManageBoxScreen()
         {
             InitializeComponent();
+            var roomList = App.RoomAccess.GetAllRooms();
+            roomType.ItemsSource = roomList;
         }
     }
 }

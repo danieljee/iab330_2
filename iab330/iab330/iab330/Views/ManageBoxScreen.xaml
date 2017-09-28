@@ -11,10 +11,7 @@
             <Label Text="Room Type:" />
             <Picker x:Name="roomType" Title="Select Room Type">
                 <Picker.Items>
-                    <x:String>Bedroom</x:String>
-                    <x:String>Dining</x:String>
-                    <x:String>Living</x:String>
-                    <x:String>Storage</x:String>
+                    <x:String></x:String>
                 </Picker.Items>
             </Picker>
             <Button x:Name="submitBox" 
