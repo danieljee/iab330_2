@@ -22272,16 +22272,16 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment3\\iab330\\iab330\\iab330.UWP\\iab330.UWP.csproj",
+      "projectUniqueName": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment4\\iab330\\iab330\\iab330.UWP\\iab330.UWP.csproj",
       "projectName": "iab330.UWP",
-      "projectPath": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment3\\iab330\\iab330\\iab330.UWP\\iab330.UWP.csproj",
-      "projectJsonPath": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment3\\iab330\\iab330\\iab330.UWP\\project.json",
+      "projectPath": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment4\\iab330\\iab330\\iab330.UWP\\iab330.UWP.csproj",
+      "projectJsonPath": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment4\\iab330\\iab330\\iab330.UWP\\project.json",
       "projectStyle": "ProjectJson",
       "frameworks": {
         "uap10.0": {
           "projectReferences": {
-            "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment3\\iab330\\iab330\\iab330\\iab330.csproj": {
-              "projectPath": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment3\\iab330\\iab330\\iab330\\iab330.csproj"
+            "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment4\\iab330\\iab330\\iab330\\iab330.csproj": {
+              "projectPath": "C:\\Users\\admin\\Desktop\\2017 sem 2\\IAB330\\assignment4\\iab330\\iab330\\iab330\\iab330.csproj"
             }
           }
         }

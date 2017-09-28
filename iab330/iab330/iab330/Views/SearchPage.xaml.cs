@@ -15,6 +15,8 @@ namespace iab330.Views
 		public SearchPage ()
 		{
 			InitializeComponent ();
+
+            var list = App.ItemAccess.GetAllItems();
 		}
 	}
 }
