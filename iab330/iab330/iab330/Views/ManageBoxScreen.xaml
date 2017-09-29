@@ -21,13 +21,13 @@
             <StackLayout x:Name="errors">
                 
             </StackLayout>
-            <ListView x:Name="boxList" ItemsSource="{Binding Path=Boxes}">
+            <ListView x:Name="boxList" ItemsSource="{Binding Path=Boxes}" ItemSelected="boxList_ItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Vertical">
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding RoomName}"/>
+                                <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
+                                <Label Text="{Binding RoomName, StringFormat='Room: {0}'}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

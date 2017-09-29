@@ -16,6 +16,7 @@ namespace iab330.Views
 		{
 			InitializeComponent ();
             searchResult.BindingContext = App.ItemDataAccess;
+           
         }
 
         protected override void OnAppearing() {
@@ -31,10 +32,11 @@ namespace iab330.Views
 
         private void SearchButton_Clicked(object sender, EventArgs e) {
             var query = searchQuery.Text;
+             
             var criteria = searchCriteria.Items[searchCriteria.SelectedIndex];
             switch (criteria) {
                 case "Room":
-    
+                   
                     break;
                 case "Box":
                     break;

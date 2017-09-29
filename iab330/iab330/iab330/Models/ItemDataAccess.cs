@@ -15,7 +15,11 @@ namespace iab330.Models {
         public ItemDataAccess() {
             database = DependencyService.Get<IDatabaseConnection>().DbConnection();
             database.CreateTable<Item>();
-            this.Items = new ObservableCollection<Item>(database.Table<Item>());
+            Items = new ObservableCollection<Item>(database.Table<Item>());
+        }
+
+        public IEnumerable<Item> GetObservableItemWithBoxId(int id) {
+            return this.Items.Where(item => item.BoxId == id);
         }
 
         public void AddNewItem(Item itemInstance) {

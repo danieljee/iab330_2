@@ -1,34 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="iab330.Views.SearchPage"
-             Title="Search">
+             x:Class="iab330.Views.EditBox">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            <Picker x:Name="searchCriteria" Title="Search Criteria Seletion">
+        <StackLayout>
+            <Label x:Name="currentBox" Text="{Binding Name, StringFormat='Box: {0}'}"/>
+            <Entry x:Name="boxName"/>
+            <Label x:Name="currentRoom" Text="{Binding RoomName, StringFormat='Room: {0}'}"/>
+            <Picker x:Name="rooms" Title="Change Room" ItemsSource="{Binding Rooms}" ItemDisplayBinding="{Binding Name}">
                 <Picker.Items>
-                    <x:String>Room</x:String>
-                    <x:String>Box</x:String>
-                    <x:String>Item</x:String>
                 </Picker.Items>
             </Picker>
-            <Entry x:Name="searchQuery" Placeholder="Enter Text Here"/>
-            <Button x:Name="searchButton" Text="Search" Clicked="SearchButton_Clicked"/>
-            <Label Text="Search Results:"/>
-            <ListView x:Name="searchResult" ItemsSource="{Binding Items}">
+            <Button x:Name="editBoxButton" Text="Edit" Clicked="editBoxButton_Clicked"/>
+            <Label x:Name="error" Text=""></Label>
+            <ListView x:Name="items">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
                                 <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
-                                <Label Text="{Binding BoxName, StringFormat='Box: {0}'}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Clicked="AddButton_Clicked" Text="Add Item"/>
+            <Button x:Name="addItemButton" Text="Add Item"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

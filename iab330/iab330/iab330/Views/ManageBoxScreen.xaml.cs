@@ -48,5 +48,10 @@ namespace iab330.Views
             App.BoxDataAccess.SaveBox(newBox);
       
         }
+
+        private void boxList_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            Box selectedBox = (Box)boxList.SelectedItem;
+            Navigation.PushAsync(new EditBox(selectedBox));
+        }
     }
 }

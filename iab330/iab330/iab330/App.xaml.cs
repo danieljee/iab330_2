@@ -14,8 +14,6 @@ namespace iab330 {
 
         public App() {
             InitializeComponent();
-            itemDataAccess = new ItemDataAccess();
-            itemDataAccess.DeleteAllItem();
             this.MainPage = new NavigationPage(new HomePage())
             {
                 BarBackgroundColor = Color.DarkGray,
