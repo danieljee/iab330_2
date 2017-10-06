@@ -10,7 +10,7 @@
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="addItemButton" Text="Add" Clicked="addItemButton_Clicked"/>
+            <Button x:Name="addItemButton" Text="Add"/>
             <Label x:Name="error" Text=""></Label>
         </StackLayout>
     </ContentPage.Content>

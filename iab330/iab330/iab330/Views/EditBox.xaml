@@ -11,7 +11,7 @@
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="editBoxButton" Text="Edit" Clicked="editBoxButton_Clicked"/>
+            <Button x:Name="editBoxButton" Text="Edit"/>
             <Label x:Name="error" Text=""></Label>
             <ListView x:Name="items">
                 <ListView.ItemTemplate>

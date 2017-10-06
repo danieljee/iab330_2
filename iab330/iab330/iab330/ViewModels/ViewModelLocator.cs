@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace iab330.ViewModels {
+    /*Singleton class
+     *Allows us to access only one instance of RoomsViewModel.
+     */
+    public static class ViewModelLocator {
+        private static RoomsViewModel _roomsViewModel = null;
+        private static BoxViewModel _boxViewModel = null;
+        public static RoomsViewModel RoomsViewModel {
+            get {
+                if (_roomsViewModel == null) {
+                    _roomsViewModel = new RoomsViewModel();
+                }
+                return _roomsViewModel;
+            }
+        }
+
+        public static BoxViewModel BoxViewModel {
+            get {
+                if (_boxViewModel == null) {
+                    _boxViewModel = new BoxViewModel();
+                }
+                return _boxViewModel;
+            }
+        }
+    }
+}

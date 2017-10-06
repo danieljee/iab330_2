@@ -7,9 +7,6 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace iab330 {
     public partial class App : Application {
-
-        static RoomDataAccess roomDataAccess;
-        static BoxDataAccess boxDataAccess;
         static ItemDataAccess itemDataAccess;
 
         public App() {
@@ -27,24 +24,6 @@ namespace iab330 {
                     itemDataAccess = new ItemDataAccess();
                 }
                 return itemDataAccess;
-            }
-        }
-
-        public static BoxDataAccess BoxDataAccess {
-            get {
-                if (boxDataAccess == null) {
-                    boxDataAccess = new BoxDataAccess();
-                }
-                return boxDataAccess;
-            }
-        }
-
-        public static RoomDataAccess RoomDataAccess {
-            get {
-                if (roomDataAccess == null) {
-                    roomDataAccess = new RoomDataAccess();
-                }
-                return roomDataAccess;
             }
         }
 

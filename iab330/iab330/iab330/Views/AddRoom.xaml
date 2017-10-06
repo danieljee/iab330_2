@@ -1,20 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="iab330.Views.AddRoom">
+             x:Class="iab330.Views.AddRoom"
+             x:Name="AddRoomPage">
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="roomName" Placeholder="Room Name"/>
-            <Button x:Name="addRoomButton" Text="Add" Clicked="addRoomButton_Clicked"/>
-            <StackLayout x:Name="errors">
-                
-            </StackLayout>
-            <ListView x:Name="roomsView" ItemsSource="{Binding Path=Rooms}">
+            <Entry x:Name="roomName" Placeholder="Room Name" Text="{Binding NewRoomName, Mode=TwoWay}"/>
+            <Button x:Name="addRoomButton" Text="Add" Command="{Binding AddRoomCommand}"/>
+            <Label Text="{Binding Error}"></Label>
+            <ListView x:Name="roomsListView" ItemsSource="{Binding Path=Rooms}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name}"/>
+                                
+                                         
+                                <Button x:Name="removeRoomButton" 
+                                        Text="X" 
+                                        Command="{Binding Path=BindingContext.RemoveRoomCommand, Source={x:Reference Name=AddRoomPage}}"
+                                        CommandParameter="{Binding .}"
+                                        />
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
