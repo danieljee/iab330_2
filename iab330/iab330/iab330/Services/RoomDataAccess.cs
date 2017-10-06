@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using System.Collections.ObjectModel;
 using SQLite;
+using SQLiteNetExtensions.Extensions;
 
 namespace iab330 {
     public class RoomDataAccess {
@@ -135,7 +136,13 @@ namespace iab330 {
             try {
                 if (id != 0) {
                     lock (collisionLock) {
-                        database.Delete<Room>(id);
+                        /*
+                         * database.Delete recursively will delete objects that are already in memory
+                         * It will not access database to load relationships of objects to delete.
+                         * Therefore, FindWithChildren will be use to load all the related children to memory.
+                         */ 
+                        var itemToDelete = database.FindWithChildren<Room>(id, true);
+                        database.Delete(itemToDelete, true);
                     }
                     isSuccessful = true;
                 }
@@ -143,6 +150,15 @@ namespace iab330 {
                 //Exception
             }
             return isSuccessful;
+        }
+
+        /* UpdateWithChildren makes sure that all the Boxes in the Boxes List
+         * are referencing this particular room, without manually assigning it.
+         */
+        public void EstablishForeignKey(Room room) {
+            lock (collisionLock) {
+                database.UpdateWithChildren(room);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using iab330.Services;
+﻿using iab330.Models;
+using iab330.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,10 +13,14 @@ namespace iab330.ViewModels {
     public class RoomsViewModel: BaseViewModel {
         private ObservableCollection<Room> _rooms;
         private RoomDataAccess roomDataAccess;
+        private BoxDataAccess boxDataAccess;
+        private ItemDataAccess itemDataAccess;
         private string _newRoomName = "", _error = "";
 
         public RoomsViewModel() {
             roomDataAccess = DataAccessLocator.RoomDataAccess;
+            boxDataAccess = DataAccessLocator.BoxDataAccess;
+            itemDataAccess = DataAccessLocator.ItemDataAccess;
             this.Rooms = roomDataAccess.GetAllRooms();
             /* Setup an add room command
              * The second lambda function determines if the button should be disabled (if returned false)
@@ -45,7 +50,13 @@ namespace iab330.ViewModels {
                 (room) => {
                     this.Rooms.Remove(room);
                     roomDataAccess.DeleteRoom(room);
-                    //Make sure to delete all boxes that belong to this room
+                    /*
+                     * Update Boxes ObservableCollection.
+                     * Is there a better way to update the collection
+                     * without reassigning it? 
+                     */ 
+                    ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
+                    ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
                 }
             );
         }

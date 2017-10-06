@@ -9,7 +9,7 @@ namespace iab330.Services {
     public class DataAccessLocator {
         private static RoomDataAccess _roomDataAccess = null;
         private static BoxDataAccess _boxDataAccess = null;
-        //private static ItemDataAccess _itemDataAccess = null;
+        private static ItemDataAccess _itemDataAccess = null;
 
         public static RoomDataAccess RoomDataAccess {
             get {
@@ -26,6 +26,15 @@ namespace iab330.Services {
                     _boxDataAccess = new BoxDataAccess();
                 }
                 return _boxDataAccess;
+            }
+        }
+
+        public static ItemDataAccess ItemDataAccess {
+            get {
+                if (_itemDataAccess == null) {
+                    _itemDataAccess = new ItemDataAccess();
+                }
+                return _itemDataAccess;
             }
         }
     }

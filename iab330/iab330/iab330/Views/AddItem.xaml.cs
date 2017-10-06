@@ -1,4 +1,5 @@
 ﻿using iab330.Models;
+using iab330.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,10 @@ namespace iab330.Views
 		public AddItem ()
 		{
 			InitializeComponent ();
-            //boxes.BindingContext = App.BoxDataAccess;
-		}
+            boxes.BindingContext = ViewModelLocator.BoxViewModel;
+            AddItemPage.BindingContext = ViewModelLocator.ItemViewModel;
+
+        }
 
         //private void addItemButton_Clicked(object sender, EventArgs e) {
         //    error.Text = "";

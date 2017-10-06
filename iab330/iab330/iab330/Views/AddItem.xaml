@@ -3,15 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iab330.Views.AddItem">
     <ContentPage.Content>
-        <StackLayout>
-            <Entry x:Name="itemName" Placeholder="Item Name"/>
-            <Entry x:Name="quantity" Placeholder="Quantity"/>
-            <Picker x:Name="boxes" Title="Select Box" ItemsSource="{Binding Boxes}" ItemDisplayBinding="{Binding Name}">
+        <StackLayout x:Name="AddItemPage">
+            <Entry x:Name="itemName" Placeholder="Item Name" Text="{Binding NewItemName, Mode=TwoWay}"/>
+            <Entry x:Name="quantity" Placeholder="Quantity" Text="{Binding NewItemQuantity, Mode=TwoWay}"/>
+            <Picker x:Name="boxes" Title="Select Box" ItemsSource="{Binding Boxes}" ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding Path=BindingContext.SelectedBox, Source={x:Reference Name=AddItemPage}, Mode=TwoWay}">
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="addItemButton" Text="Add"/>
-            <Label x:Name="error" Text=""></Label>
+            <Button x:Name="addItemButton" Text="Add" Command="{Binding CreateItemCommand}"/>
+            <Label x:Name="error" Text="{Binding Error}"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

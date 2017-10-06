@@ -1,5 +1,6 @@
 ﻿
 using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,35 +10,13 @@ using System.Threading.Tasks;
 
 namespace iab330 {
     [Table("Room")]
-    public class Room : INotifyPropertyChanged {
-        private int _id;
+    public class Room {
         [PrimaryKey, AutoIncrement]
-        public int Id {
-            get {
-                return _id;
-            }
-            set {
-                this._id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
-
-        private string _name;
+        public int Id { get; set; }
         [NotNull, MaxLength(50)]
-        public string Name {
-            get {
-                return _name;
-            }
-            set {
-                this._name = value;
-                OnPropertyChanged(nameof(Name));
-            }
-        }
+        public string Name { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string propertyName) {
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Box> Boxes { get; set; }
     }
 }

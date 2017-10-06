@@ -11,6 +11,7 @@ namespace iab330.ViewModels {
     public static class ViewModelLocator {
         private static RoomsViewModel _roomsViewModel = null;
         private static BoxViewModel _boxViewModel = null;
+        private static ItemViewModel _itemViewModel = null;
         public static RoomsViewModel RoomsViewModel {
             get {
                 if (_roomsViewModel == null) {
@@ -26,6 +27,15 @@ namespace iab330.ViewModels {
                     _boxViewModel = new BoxViewModel();
                 }
                 return _boxViewModel;
+            }
+        }
+
+        public static ItemViewModel ItemViewModel {
+            get {
+                if (_itemViewModel == null) {
+                    _itemViewModel = new ItemViewModel();
+                }
+                return _itemViewModel;
             }
         }
     }

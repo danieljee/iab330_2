@@ -1,4 +1,5 @@
 ﻿using SQLite;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -123,7 +124,8 @@ namespace iab330.Services {
             try {
                 if (id != 0) {
                     lock (collisionLock) {
-                        database.Delete<Box>(id);
+                        var itemToDelete = database.FindWithChildren<Box>(id);
+                        database.Delete(itemToDelete, true);
                     }
                     isSuccessful = true;
                 }
@@ -132,6 +134,12 @@ namespace iab330.Services {
                 //Exception
             }
             return isSuccessful;
+        }
+
+        public void EstablishForeignKey(Box box) {
+            lock (collisionLock) {
+                database.UpdateWithChildren(box);
+            }
         }
     }
 }

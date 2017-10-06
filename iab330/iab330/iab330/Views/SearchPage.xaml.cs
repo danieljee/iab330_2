@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iab330.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace iab330.Views
 		public SearchPage ()
 		{
 			InitializeComponent ();
-            searchResult.BindingContext = App.ItemDataAccess;
+            searchResult.BindingContext = ViewModelLocator.ItemViewModel;
            
         }
 
@@ -41,7 +42,7 @@ namespace iab330.Views
                 case "Box":
                     break;
                 case "Item":
-                    searchResult.ItemsSource = App.ItemDataAccess.searchItem(query);
+                    //searchResult.ItemsSource = App.ItemDataAccess.searchItem(query);
                     break;
                 default:
                     break;
