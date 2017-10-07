@@ -16,19 +16,17 @@ namespace iab330.Views
         public ManageBoxScreen()
         {
             InitializeComponent();
-        }
-
-
-        protected override void OnAppearing() {
-            base.OnAppearing();
-           
             roomType.BindingContext = ViewModelLocator.RoomsViewModel;
             boxList.BindingContext = ViewModelLocator.BoxViewModel;
         }
 
+        protected override void OnDisappearing() {
+            base.OnDisappearing();
+
+        }
+
         private void boxList_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
-            Box selectedBox = (Box)boxList.SelectedItem;
-            Navigation.PushAsync(new EditBox(selectedBox));
+            Navigation.PushAsync(new EditBox());
         }
     }
 }

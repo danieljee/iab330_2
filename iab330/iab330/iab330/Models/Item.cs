@@ -18,6 +18,8 @@ namespace iab330.Models {
         public string Name { get; set; }
         public int Quantity { get; set; }
 
+        //public string BoxName { get; set; }
+
         [ForeignKey(typeof(Box))]
         public int BoxId { get; set; }
 

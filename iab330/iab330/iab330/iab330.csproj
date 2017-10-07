@@ -64,6 +64,9 @@
     <Compile Include="Views\EditBox.xaml.cs">
       <DependentUpon>EditBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditItem.xaml.cs">
+      <DependentUpon>EditItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HelpScreen.xaml.cs">
       <DependentUpon>HelpScreen.xaml</DependentUpon>
     </Compile>
@@ -148,7 +151,12 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Views\EditItem.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\AddRoom.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

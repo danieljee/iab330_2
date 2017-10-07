@@ -18,12 +18,26 @@ namespace iab330.ViewModels {
         private string _newItemName;
         private string _newItemQuantity;
         private Box _selectedBox = null;
+        private Item _itemToBeEdited;
+
+        //public ObservableCollection<Item> getItemsFromRooms(ObservableCollection<Room> rooms) {
+        //    ObservableCollection<Item> items = new ObservableCollection<Item>();
+        //    foreach (Room room in rooms) {
+        //        foreach (Box box in room.Boxes) {
+        //            foreach (Item item in box.Items) {
+        //                items.Add(item);
+        //            }
+        //        }
+        //    }
+        //    return items;
+        //}
 
         public ItemViewModel() {
             itemDataAccess = DataAccessLocator.ItemDataAccess;
             boxDataAccess = DataAccessLocator.BoxDataAccess;
             Items = itemDataAccess.GetAllItems();
-            //Set the selected box as the first box in the collection.
+            //Items = getItemsFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
+
             CreateItemCommand = new Command(
                 () => {
                     Error = "";
@@ -45,6 +59,7 @@ namespace iab330.ViewModels {
                     var newItem = new Item {
                         Name = NewItemName,
                         Quantity = quantity,
+                        //BoxName = SelectedBox.Name
                     };
                     itemDataAccess.InsertItem(newItem);
 
@@ -56,11 +71,11 @@ namespace iab330.ViewModels {
 
                     boxDataAccess.EstablishForeignKey(SelectedBox);
                     Items.Add(newItem);
+                    ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
                     Error = "Item added!";
-
-                    if (newItem.Box.Name == SelectedBox.Name) {
-                        Error = "Foreign Key Established";
-                    }
+                    SelectedBox = null;
+                    NewItemName = "";
+                    NewItemQuantity = "";
                 },
                 () => {
                     return true;
@@ -73,17 +88,63 @@ namespace iab330.ViewModels {
                     itemDataAccess.DeleteItem(item);
                 }
             );
+
+            UpdateItemCommand = new Command(
+                () => {
+                    Int32 quantity;
+                    if (!string.IsNullOrEmpty(NewItemName)) {
+                        if (!string.IsNullOrEmpty(NewItemQuantity)) {
+                            if (!Int32.TryParse(NewItemQuantity, out quantity)) {
+                                Error = "Quantity should be number";
+                                return;
+                            }
+                            ItemToBeEdited.Quantity = quantity;
+                        }
+                      
+                        ItemToBeEdited.Name = NewItemName;
+                        itemDataAccess.UpdateItem(ItemToBeEdited);
+                    }
+
+                    if (SelectedBox != null && (ItemToBeEdited.Box != SelectedBox)) {
+                        if (SelectedBox.Items == null) {
+                            SelectedBox.Items = new List<Item> { ItemToBeEdited };
+                        } else {
+                            SelectedBox.Items.Add(ItemToBeEdited);
+                        }
+                        boxDataAccess.EstablishForeignKey(SelectedBox);
+                    }
+                    Items = itemDataAccess.GetAllItems();
+                    ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
+                    NewItemName = "";
+                    NewItemQuantity = "";
+                    SelectedBox = null;
+                    Error = "Edited!";
+                }
+            );
         }
 
         public ICommand CreateItemCommand { protected set; get; }
         public ICommand RemoveItemCommand { protected set; get; }
+        public ICommand UpdateItemCommand { protected set; get; }
+
+        public Item ItemToBeEdited {
+            get {
+                return _itemToBeEdited;
+            }
+            set {
+                if (_itemToBeEdited != value) {
+                    _itemToBeEdited = value;
+                    OnPropertyChanged("ItemToBeEdited");
+                }
+            }
+        }
 
         public ObservableCollection<Item> Items {
             get { return _items; }
             set {
                 if (_items != value) {
                     _items = value;
-                    OnPropertyChanged("Itemes");
+                    OnPropertyChanged("Items");
                 }
             }
         }

@@ -18,12 +18,31 @@ namespace iab330.ViewModels {
         private string _newBoxName;
         private Room _selectedRoom = null;
 
+        private Box _boxToBeEdited;
+
+        /*
+         * At the moment, this is the only way to get a collection of boxes with Room property referencing rooms.
+         * When an element is loaded into memory either through database.get method or query, 
+         * A property that needs to reference another model is set to null (no recursive retrival).
+         * RoomDataAccess's getAllRooms function retrieves all rooms by using GetAllWithChildren which will fill Boxes property
+         * Each box in Boxes property will have Room property set. 
+         */
+        //private ObservableCollection<Box> getBoxesFromRooms(ObservableCollection<Room> rooms) {
+        //    ObservableCollection<Box> boxes = new ObservableCollection<Box>();
+        //    foreach (Room room in rooms) {
+        //        foreach (Box box in room.Boxes) {
+        //            boxes.Add(box);
+        //        }
+        //    }
+        //    return boxes;
+        //}
+
         public BoxViewModel() {
             boxDataAccess = DataAccessLocator.BoxDataAccess;
             roomDataAccess = DataAccessLocator.RoomDataAccess;
             itemDataAccess = DataAccessLocator.ItemDataAccess;
             Boxes = boxDataAccess.GetAllBoxes();
-            //Set the selected room as the first room in the collection.
+            //Boxes = getBoxesFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
             CreateBoxCommand = new Command(
                 () => {
                     Error = "";
@@ -39,6 +58,7 @@ namespace iab330.ViewModels {
                     
                     var newBox = new Box {
                         Name = NewBoxName,
+                        //RoomName = SelectedRoom.Name
                     };
                     boxDataAccess.InsertBox(newBox);
 
@@ -49,6 +69,9 @@ namespace iab330.ViewModels {
                     }
                     roomDataAccess.EstablishForeignKey(SelectedRoom);
                     Boxes.Add(newBox);
+
+                    NewBoxName = "";
+                    SelectedRoom = null;
                 },
                 () => {
                     return true;
@@ -63,10 +86,40 @@ namespace iab330.ViewModels {
                     ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
                 }
             );
+
+            UpdateBoxCommand = new Command(
+                () => {
+                    if (!string.IsNullOrEmpty(NewBoxName)) {
+                        //Should I prevent duplicate box name?
+                        BoxToBeEdited.Name = NewBoxName;
+                        boxDataAccess.UpdateBox(BoxToBeEdited);
+                    }
+
+                    /*
+                     * After changing the room, will deleting the previous room delete this box even if it has changed?
+                     * test 1: Create a room, then a box, change the box's room then remove the room.
+                     * test 2: Create a room then a box. Exit the app. Change the box's room then remove the room.
+                     */
+                    if (SelectedRoom != null && (BoxToBeEdited.Room != SelectedRoom)) {
+                        if (SelectedRoom.Boxes == null) {
+                            SelectedRoom.Boxes = new List<Box> { BoxToBeEdited };
+                        } else {
+                            SelectedRoom.Boxes.Add(BoxToBeEdited);
+                        }
+                        roomDataAccess.EstablishForeignKey(SelectedRoom);
+                    }
+                    SelectedRoom = null;
+                    NewBoxName = "";
+                    Error = "Edited!";
+                    Boxes = boxDataAccess.GetAllBoxes();
+                    ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                }
+            );
         }
 
         public ICommand CreateBoxCommand { protected set; get; }
         public ICommand RemoveBoxCommand { protected set; get; }
+        public ICommand UpdateBoxCommand { protected set; get; }
 
         public ObservableCollection<Box> Boxes {
             get { return _boxes; }
@@ -109,6 +162,19 @@ namespace iab330.ViewModels {
                 }
             }
         }
+
+        public Box BoxToBeEdited {
+            get {
+                return _boxToBeEdited;
+            }
+            set {
+                if (_boxToBeEdited != value) {
+                    _boxToBeEdited = value;
+                    OnPropertyChanged("BoxToBeEdited");
+                }
+            }
+        }
+
 
     }
 }

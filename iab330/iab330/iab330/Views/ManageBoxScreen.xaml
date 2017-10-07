@@ -21,13 +21,13 @@
                     Text="Submit"
                     Command="{Binding Path=BindingContext.CreateBoxCommand, Source={x:Reference Name=boxList}}"/>
             <Label Text="{Binding Path=BindingContext.Error, Source={x:Reference Name=boxList}}"/>
-            <ListView x:Name="boxList" ItemsSource="{Binding Boxes}" ItemSelected="boxList_ItemSelected">
+            <ListView x:Name="boxList" ItemsSource="{Binding Boxes}" ItemSelected="boxList_ItemSelected" SelectedItem="{Binding BoxToBeEdited, Mode=OneWayToSource}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
-                                <Label Text="{Binding RoomName, StringFormat='Room: {0}'}"/>
+                                <Label Text="{Binding Room.Name, StringFormat='Room: {0}'}"/>
                                 <Button x:Name="removeBox" 
                                 Text="X"
                                 Command="{Binding Path=BindingContext.RemoveBoxCommand, Source={x:Reference Name=boxList}}"

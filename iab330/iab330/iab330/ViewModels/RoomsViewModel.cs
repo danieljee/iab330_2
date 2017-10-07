@@ -37,6 +37,7 @@ namespace iab330.ViewModels {
                         };
                         this.Rooms.Add(newRoom); //Always add to ObservableCollection to update view
                         this.SaveRoom(newRoom);//Remove this later when OnPause save function is implemented
+                        NewRoomName = ""; //Clear the input field
                     } else {
                         this.Error = "Room Already Exists";
                     }

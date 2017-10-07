@@ -41,8 +41,9 @@ namespace iab330.Services {
                     itemList = database.Query<Item>("SELECT * FROM [Item]");
                 }
                 if (itemList != null && itemList.Count > 0) {
-                    foreach (Item Item in itemList) {
-                        itemCollection.Add(Item);
+                    foreach (Item item in itemList) {
+                        item.Box = database.Get<Box>(item.BoxId);
+                        itemCollection.Add(item);
                     }
                 }
             } catch (Exception ex) {

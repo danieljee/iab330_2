@@ -15,14 +15,14 @@
             <Entry x:Name="searchQuery" Placeholder="Enter Text Here"/>
             <Button x:Name="searchButton" Text="Search" Clicked="SearchButton_Clicked"/>
             <Label Text="Search Results:"/>
-            <ListView x:Name="searchResult" ItemsSource="{Binding Items}">
+            <ListView x:Name="searchResult" ItemsSource="{Binding Items}" ItemSelected="SearchResult_ItemSelected"  SelectedItem="{Binding ItemToBeEdited, Mode=OneWayToSource}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
                                 <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
-                                <Label Text="{Binding BoxName, StringFormat='Box: {0}'}"/>
+                                <Label Text="{Binding Box.Name, StringFormat='Box: {0}'}"/>
                                 <Button Text="X" 
                                         Command="{Binding Path=BindingContext.RemoveItemCommand, Source={x:Reference Name=searchResult}}"
                                         CommandParameter="{Binding .}"/>

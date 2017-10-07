@@ -3,23 +3,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="iab330.Views.EditBox">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="currentBox" Text="{Binding Name, StringFormat='Box: {0}'}"/>
-            <Entry x:Name="boxName"/>
-            <Label x:Name="currentRoom" Text="{Binding RoomName, StringFormat='Room: {0}'}"/>
-            <Picker x:Name="rooms" Title="Change Room" ItemsSource="{Binding Rooms}" ItemDisplayBinding="{Binding Name}">
+        <StackLayout x:Name="EditBoxPage">
+            <Label x:Name="currentBox" Text="{Binding BoxToBeEdited.Name, StringFormat='Box: {0}'}"/>
+            <Entry x:Name="boxName" Placeholder="New Box Name" Text="{Binding NewBoxName, Mode=TwoWay}"/>
+            <Label x:Name="currentRoom" Text="{Binding BoxToBeEdited.Room.Name, StringFormat='Room: {0}'}"/>
+            <Picker x:Name="roomType" Title="Select Room Type" ItemsSource="{Binding Rooms}"  SelectedItem="{Binding Path=BindingContext.SelectedRoom, Source={x:Reference Name=currentBox}, Mode=OneWayToSource}" ItemDisplayBinding="{Binding Name}">
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="editBoxButton" Text="Edit"/>
-            <Label x:Name="error" Text=""></Label>
-            <ListView x:Name="items">
+            <Button x:Name="editBoxButton" Text="Edit" Command="{Binding UpdateBoxCommand}"/>
+            <Label x:Name="error" Text="{Binding Error}"></Label>
+            <ListView x:Name="items" ItemsSource="{Binding BoxToBeEdited.Items}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
-                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
+                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

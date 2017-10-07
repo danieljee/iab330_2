@@ -36,10 +36,12 @@ namespace iab330.Services {
 
             try {
                 lock (collisionLock) {
-                    boxList = database.Query<Box>("SELECT * FROM [Box]");
+                    //boxList = database.Query<Box>("SELECT * FROM [Box]");
+                    boxList = database.GetAllWithChildren<Box>();
                 }
                 if (boxList != null && boxList.Count > 0) {
                     foreach (Box box in boxList) {
+                        box.Room = database.Get<Room>(box.RoomId);
                         boxCollection.Add(box);
                     }
                 }

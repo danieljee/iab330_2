@@ -42,7 +42,8 @@ namespace iab330 {
 
             try {
                 lock (collisionLock) {
-                    roomList = database.Query<Room>("SELECT * FROM [Room]");
+                    //roomList = database.Query<Room>("SELECT * FROM [Room]");
+                    roomList = database.GetAllWithChildren<Room>();
                 }
                 if (roomList != null && roomList.Count > 0) {
                     foreach(Room room in roomList) {

@@ -22,7 +22,7 @@ namespace iab330.Views
 
         protected override void OnAppearing() {
             base.OnAppearing();
-            searchCriteria.SelectedIndex = 2;
+            searchCriteria.SelectedIndex = 2; //
         }
 
 
@@ -31,6 +31,7 @@ namespace iab330.Views
             Navigation.PushAsync(new AddItem());
         }
 
+        //Remove this. Move this to viewmodel
         private void SearchButton_Clicked(object sender, EventArgs e) {
             var query = searchQuery.Text;
              
@@ -47,6 +48,10 @@ namespace iab330.Views
                 default:
                     break;
             }
+        }
+
+        private void SearchResult_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            Navigation.PushAsync(new EditItem());
         }
     }
 }

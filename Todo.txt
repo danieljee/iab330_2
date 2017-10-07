@@ -1,3 +1,5 @@
 1. fix adding item quantity
 
 2. Make sure ObservableCollection is notified when children are deleted
+
+3. Clicking individual box in manage boxes page. Each box instance will not load the room info

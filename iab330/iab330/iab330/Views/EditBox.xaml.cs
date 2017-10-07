@@ -12,20 +12,11 @@ using Xamarin.Forms.Xaml;
 namespace iab330.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditBox : ContentPage {
-        static Box observableBox;
-        static IEnumerable<Item> itemsInTheBox;
-        private RoomsViewModel roomsViewModel;
 
-        public EditBox(Box targetBox) {
+        public EditBox() {
             InitializeComponent();
-            roomsViewModel = ViewModelLocator.RoomsViewModel;
-
-            //observableBox = App.BoxDataAccess.GetObservableBox(targetBox.Id).First();
-            //this.BindingContext = observableBox;
-            //boxName.Placeholder = observableBox.Name;
-            //rooms.BindingContext = roomsViewModel;
-            //itemsInTheBox = App.ItemDataAccess.GetObservableItemWithBoxId(targetBox.Id);
-            //items.ItemsSource = itemsInTheBox;
+            EditBoxPage.BindingContext = ViewModelLocator.BoxViewModel;
+            roomType.BindingContext = ViewModelLocator.RoomsViewModel;
         }
 
         //private void editBoxButton_Clicked(object sender, EventArgs e) {
