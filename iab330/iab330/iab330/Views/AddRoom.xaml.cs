@@ -24,5 +24,9 @@ namespace iab330.Views
             base.OnAppearing();
             BindingContext = roomsViewModel;
         }
+
+        private void roomsListView_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
+            Navigation.PushAsync(new EditRoom());
+        }
     }
 }

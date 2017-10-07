@@ -8,7 +8,7 @@
             <Entry x:Name="roomName" Placeholder="Room Name" Text="{Binding NewRoomName, Mode=TwoWay}"/>
             <Button x:Name="addRoomButton" Text="Add" Command="{Binding AddRoomCommand}"/>
             <Label Text="{Binding Error}"></Label>
-            <ListView x:Name="roomsListView" ItemsSource="{Binding Path=Rooms}">
+            <ListView x:Name="roomsListView" ItemsSource="{Binding Path=Rooms}" ItemSelected="roomsListView_ItemSelected"  SelectedItem="{Binding RoomToBeEdited, Mode=OneWayToSource}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

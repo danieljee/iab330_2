@@ -16,6 +16,7 @@ namespace iab330.ViewModels {
         private BoxDataAccess boxDataAccess;
         private ItemDataAccess itemDataAccess;
         private string _newRoomName = "", _error = "";
+        private Room _roomToBeEdited;
 
         public RoomsViewModel() {
             roomDataAccess = DataAccessLocator.RoomDataAccess;
@@ -60,7 +61,23 @@ namespace iab330.ViewModels {
                     ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
                 }
             );
+
+            this.UpdateRoomCommand = new Command(
+                () => {
+                    if (!string.IsNullOrEmpty(NewRoomName)) {
+                        Rooms.Remove(RoomToBeEdited);
+                        RoomToBeEdited.Name = NewRoomName;
+                        roomDataAccess.UpdateRoom(RoomToBeEdited);
+                        Rooms.Insert(0, RoomToBeEdited);
+                        Error = "Edited!";
+                    }
+
+                    ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
+                }
+            );
         }
+
+
 
         public string Error {
             get {
@@ -70,6 +87,18 @@ namespace iab330.ViewModels {
                 if (_error != value) {
                     _error = value;
                     OnPropertyChanged("Error");
+                }
+            }
+        }
+
+        public Room RoomToBeEdited {
+            get {
+                return _roomToBeEdited;
+            }
+            set {
+                if (_roomToBeEdited != value) {
+                    _roomToBeEdited = value;
+                    OnPropertyChanged("RoomToBeEdited");
                 }
             }
         }
@@ -112,7 +141,7 @@ namespace iab330.ViewModels {
 
         public ICommand AddRoomCommand { protected set; get; }
         public ICommand RemoveRoomCommand { protected set; get; }
-
+        public ICommand UpdateRoomCommand { protected set; get; }
         //This may be redundant
         public bool SaveRoom(Room room) {
             if (room.Id != 0) {
