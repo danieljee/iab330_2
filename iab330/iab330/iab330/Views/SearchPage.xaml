@@ -4,28 +4,39 @@
              x:Class="iab330.Views.SearchPage"
              Title="Search">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
+        <StackLayout HorizontalOptions="Center"
+                     WidthRequest="300">
             <Entry x:Name="searchQuery" Placeholder="Enter Text Here" Text="{Binding SearchQuery, Mode=TwoWay}"/>
             <Label Text="{Binding SearchQuery}"/>
-            <Button x:Name="searchButton" Text="Search" Command="{Binding SearchCommand}"/>
+            <Button x:Name="searchButton" Text="Search" Command="{Binding SearchCommand}" BackgroundColor="Coral"/>
             <Label Text="Search Results:"/>
             <ListView x:Name="searchResult" ItemsSource="{Binding SearchResult}" ItemSelected="SearchResult_ItemSelected"  SelectedItem="{Binding ItemToBeEdited, Mode=OneWayToSource}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
-                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" />
-                                <Label Text="{Binding Box.Name, StringFormat='Box: {0}'}"/>
-                                <Button Text="X" 
+                            <Grid>
+                                <Label Text="{Binding Name, StringFormat='Name: &#10;{0}'}"
+                                       Grid.Row="0"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding Quantity, StringFormat='Quantity: &#10;{0}'}" 
+                                       Grid.Row="0"
+                                       Grid.Column="1"/>
+                                <Label Text="{Binding Box.Name, StringFormat='Box: &#10;{0}'}"
+                                       Grid.Row="0"
+                                       Grid.Column="2"/>
+                                <Button Image="bin.png" 
+                                        Grid.Row="0"
+                                        Grid.Column="3"
+                                        HorizontalOptions="Center"
+                                        BackgroundColor="Coral"
                                         Command="{Binding Path=BindingContext.RemoveItemCommand, Source={x:Reference Name=searchResult}}"
                                         CommandParameter="{Binding .}"/>
-                            </StackLayout>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Clicked="AddButton_Clicked" Text="Add Item"/>
+            <Button Clicked="AddButton_Clicked" Text="Add Item" BackgroundColor="Coral"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

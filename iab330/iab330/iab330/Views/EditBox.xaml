@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="iab330.Views.EditBox">
+             x:Class="iab330.Views.EditBox"
+             Title="Editing Box">
     <ContentPage.Content>
-        <StackLayout x:Name="EditBoxPage">
+        <StackLayout x:Name="EditBoxPage"
+                     HorizontalOptions="Center"
+                     WidthRequest="300">
             <Label x:Name="currentBox" Text="{Binding BoxToBeEdited.Name, StringFormat='Box: {0}'}"/>
             <Entry x:Name="boxName" Placeholder="New Box Name" Text="{Binding NewBoxName, Mode=TwoWay}"/>
             <Label x:Name="currentRoom" Text="{Binding BoxToBeEdited.Room.Name, StringFormat='Room: {0}'}"/>
@@ -11,21 +14,28 @@
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="editBoxButton" Text="Edit" Command="{Binding UpdateBoxCommand}"/>
+            <Button x:Name="editBoxButton" Text="Edit" Command="{Binding UpdateBoxCommand}" BackgroundColor="SkyBlue"/>
             <Label x:Name="error" Text="{Binding Error}"></Label>
+            <Label Text="List of Items in Box:"/>
             <ListView x:Name="items" ItemsSource="{Binding BoxToBeEdited.Items}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
-                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}"/>
-                            </StackLayout>
+                            <Grid>
+                                <Label Text="{Binding Name, StringFormat='Name: {0}'}"
+                                       Grid.Column="0"
+                                       Grid.Row="0"/>
+                                <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}"
+                                       HorizontalOptions="EndAndExpand"
+                                       Grid.Column="1"
+                                       Grid.Row="0"/>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="addItemButton" Text="Add Item"/>
+            <Button x:Name="addItemButton" Text="Add Item" BackgroundColor="SkyBlue"/>
+            <Button x:Name="printLabelButton" Text="Print Label" BackgroundColor="SkyBlue"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -5,7 +5,9 @@
              x:Name="ManageBoxPage"
              Title="Manage Boxes">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
+        <StackLayout HorizontalOptions="Center"
+                     VerticalOptions="CenterAndExpand"
+                     WidthRequest="300">
             <Label Text="Add new boxes here:" />
             <Entry x:Name="boxName"
                    Placeholder="Enter Box Name Here" 
@@ -17,22 +19,36 @@
             </Picker>
 
             <Button x:Name="createBox" 
-                    WidthRequest="100"
-                    Text="Submit"
+                    BackgroundColor="SkyBlue"
+                    WidthRequest="300"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    Text="Create Box"
                     Command="{Binding Path=BindingContext.CreateBoxCommand, Source={x:Reference Name=boxList}}"/>
             <Label Text="{Binding Path=BindingContext.Error, Source={x:Reference Name=boxList}}"/>
             <ListView x:Name="boxList" ItemsSource="{Binding Boxes}" ItemSelected="boxList_ItemSelected" SelectedItem="{Binding BoxToBeEdited, Mode=OneWayToSource}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding Name, StringFormat='Name: {0}'}"/>
-                                <Label Text="{Binding Room.Name, StringFormat='Room: {0}'}"/>
+                            <Grid>
+                                <Label Text="{Binding Name, StringFormat='Name: &#10;{0}'}"
+                                       Grid.Row="0"
+                                       Grid.Column="0"/>
+                                <Label Text="{Binding Room.Name, StringFormat='Room: &#10;{0}'}"
+                                       Grid.Row="0"
+                                       Grid.Column="1"/>
                                 <Button x:Name="removeBox" 
-                                Text="X"
-                                Command="{Binding Path=BindingContext.RemoveBoxCommand, Source={x:Reference Name=boxList}}"
-                                CommandParameter="{Binding .}"/>
-                            </StackLayout>
+                                        Image="bin.png"
+                                        BackgroundColor="SkyBlue"
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        HeightRequest="50"
+                                        WidthRequest="75"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Center"
+                                        Command="{Binding Path=BindingContext.RemoveBoxCommand, Source={x:Reference Name=boxList}}"
+                                        CommandParameter="{Binding .}"/>
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
