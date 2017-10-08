@@ -16,16 +16,18 @@ namespace iab330.Views
 		public SearchPage ()
 		{
 			InitializeComponent ();
-            searchResult.BindingContext = ViewModelLocator.ItemViewModel;
-           
+            BindingContext = ViewModelLocator.ItemViewModel;
         }
 
         protected override void OnAppearing() {
             base.OnAppearing();
-            searchCriteria.SelectedIndex = 2; //
+            searchButton.Command.Execute(null);
         }
 
-
+        protected override void OnDisappearing() {
+            base.OnDisappearing();
+            searchQuery.Text = "";
+        }
 
         private void AddButton_Clicked(object sender, EventArgs e) {
             Navigation.PushAsync(new AddItem());
@@ -34,20 +36,6 @@ namespace iab330.Views
         //Remove this. Move this to viewmodel
         private void SearchButton_Clicked(object sender, EventArgs e) {
             var query = searchQuery.Text;
-             
-            var criteria = searchCriteria.Items[searchCriteria.SelectedIndex];
-            switch (criteria) {
-                case "Room":
-                   
-                    break;
-                case "Box":
-                    break;
-                case "Item":
-                    //searchResult.ItemsSource = App.ItemDataAccess.searchItem(query);
-                    break;
-                default:
-                    break;
-            }
         }
 
         private void SearchResult_ItemSelected(object sender, SelectedItemChangedEventArgs e) {

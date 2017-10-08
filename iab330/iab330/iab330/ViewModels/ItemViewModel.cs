@@ -12,6 +12,7 @@ using Xamarin.Forms;
 namespace iab330.ViewModels {
     public class ItemViewModel: BaseViewModel {
         private ObservableCollection<Item> _items;
+        private IEnumerable<Item> _searchResult;
         private ItemDataAccess itemDataAccess;
         private BoxDataAccess boxDataAccess;
         private string _error;
@@ -19,6 +20,7 @@ namespace iab330.ViewModels {
         private string _newItemQuantity;
         private Box _selectedBox = null;
         private Item _itemToBeEdited;
+        private string _searchQuery = "";
 
         //public ObservableCollection<Item> getItemsFromRooms(ObservableCollection<Room> rooms) {
         //    ObservableCollection<Item> items = new ObservableCollection<Item>();
@@ -121,11 +123,19 @@ namespace iab330.ViewModels {
                     Error = "Edited!";
                 }
             );
+
+            SearchCommand = new Command(
+                () => {
+                    SearchResult = Items.Where(item => item.Name.StartsWith(SearchQuery));
+
+                }
+            );
         }
 
         public ICommand CreateItemCommand { protected set; get; }
         public ICommand RemoveItemCommand { protected set; get; }
         public ICommand UpdateItemCommand { protected set; get; }
+        public ICommand SearchCommand { protected set; get; }
 
         public Item ItemToBeEdited {
             get {
@@ -135,6 +145,31 @@ namespace iab330.ViewModels {
                 if (_itemToBeEdited != value) {
                     _itemToBeEdited = value;
                     OnPropertyChanged("ItemToBeEdited");
+                }
+            }
+        }
+
+        public IEnumerable<Item> SearchResult {
+            get {
+              
+                return _searchResult;
+            }
+            set {
+                if (_searchResult != value) {
+                    _searchResult = value;
+                    OnPropertyChanged("SearchResult");
+                }
+            }
+        }
+
+        public string SearchQuery {
+            get {
+                return _searchQuery;
+            }
+            set {
+                if (_searchQuery != value) {
+                    _searchQuery = value;
+                    OnPropertyChanged("SearchQuery");
                 }
             }
         }
