@@ -31,7 +31,8 @@ namespace iab330.ViewModels {
                     this.Error = ""; //Always clear error
                     Room room = this.GetObservableRoom(this.NewRoomName);
                     if (String.IsNullOrEmpty(this.NewRoomName)) {
-                        this.Error = "Please enter a name"; //This may be redundant
+                        Application.Current.MainPage.DisplayAlert("Error", "Please enter a name", "Ok");
+                        //this.Error = "Please enter a name"; //This may be redundant
                     } else if (room == null) {
                         var newRoom = new Room {
                             Name = NewRoomName
@@ -40,7 +41,8 @@ namespace iab330.ViewModels {
                         this.SaveRoom(newRoom);//Remove this later when OnPause save function is implemented
                         NewRoomName = ""; //Clear the input field
                     } else {
-                        this.Error = "Room Already Exists";
+                        Application.Current.MainPage.DisplayAlert("Error", "This room already exists", "Ok");
+                        //this.Error = "Room Already Exists";
                     }
                 },
                 () => {

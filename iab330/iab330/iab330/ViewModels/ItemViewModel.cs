@@ -44,21 +44,24 @@ namespace iab330.ViewModels {
                 () => {
                     Error = "";
                     int quantity;
-                    if (SelectedBox == null) {//If no box is selected
-                        Error = "Please select a box";
-                        return;
-                    } else if (String.IsNullOrEmpty(NewItemName)) { //If name field is empty. Not needed?
-                        Error = "Please enter the item name";
+                    if (String.IsNullOrEmpty(NewItemName)) { //If name field is empty. Not needed?
+                        Application.Current.MainPage.DisplayAlert("Error", "Please enter the item's name.", "Ok");
+                        //Error = "Please enter the item name";
                         return;
                     } else if (!Int32.TryParse(NewItemQuantity, out quantity)) {
-                        Error = "Quantity should be a number";
+                        Application.Current.MainPage.DisplayAlert("Error", "Quantity should be a number.", "Ok");
+                        //Error = "Quantity should be a number";
                         return;
                     } else if (quantity < 1) {
-                        Error = "Please enter a quantity larger than zero";
+                        Application.Current.MainPage.DisplayAlert("Error", "Please enter a quantity larger than zero.", "Ok");
+                        //Error = "Please enter a quantity larger than zero";
+                        return;
+                    } else if (SelectedBox == null) {//If no box is selected
+                        Application.Current.MainPage.DisplayAlert("Error", "Please select a box.", "Ok");
+                        //Error = "Please select a box";
                         return;
                     }
-                  
-                    var newItem = new Item {
+                        var newItem = new Item {
                         Name = NewItemName,
                         Quantity = quantity,
                         //BoxName = SelectedBox.Name
@@ -102,7 +105,8 @@ namespace iab330.ViewModels {
                     if (!string.IsNullOrEmpty(NewItemName)) {
                         if (!string.IsNullOrEmpty(NewItemQuantity)) {
                             if (!Int32.TryParse(NewItemQuantity, out quantity)) {
-                                Error = "Quantity should be number";
+                                Application.Current.MainPage.DisplayAlert("Error", "Quantity should be a number.", "Ok");
+                                //Error = "Quantity should be number";
                                 return;
                             }
                             ItemToBeEdited.Quantity = quantity;

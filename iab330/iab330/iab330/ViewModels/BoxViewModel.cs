@@ -46,14 +46,20 @@ namespace iab330.ViewModels {
             CreateBoxCommand = new Command(
                 () => {
                     Error = "";
-                    if (SelectedRoom == null) {//If no room is selected
-                        
-                        Error = "Please select a room";
+                    if (String.IsNullOrEmpty(NewBoxName))
+                    { //If name field is empty. Not needed?
+                        Application.Current.MainPage.DisplayAlert("Error", "Please enter the box's name.", "Ok");
+                        //Error = "Please enter the box name";
                         return;
-                    } else if (String.IsNullOrEmpty(NewBoxName)) { //If name field is empty. Not needed?
-                        Error = "Please enter the box name";
+                    }
+                    else if (SelectedRoom == null)
+                    {//If no room is selected
+                        Application.Current.MainPage.DisplayAlert("Error", "No room has been selected. Please select a room.", "Ok");
+                        //Error = "Please select a room";
                         return;
-                    } else if (false) {
+                    }
+                    else if (false)
+                    {
                         //Check to see if the box name is already being used
                     }
                     
