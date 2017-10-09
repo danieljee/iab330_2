@@ -85,9 +85,14 @@ namespace iab330.ViewModels {
             );
 
             RemoveItemCommand = new Command<Item>(
-                (item) => {
-                    Items.Remove(item);
-                    itemDataAccess.DeleteItem(item);
+                async (item) =>
+                {
+                    bool answer = await Application.Current.MainPage.DisplayAlert("Delete Item", "Are you sure you want to delete item?", "Yes", "No");
+                    if (answer)
+                    {
+                        Items.Remove(item);
+                        itemDataAccess.DeleteItem(item);
+                    }
                 }
             );
 

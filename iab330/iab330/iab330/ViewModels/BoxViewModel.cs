@@ -47,6 +47,7 @@ namespace iab330.ViewModels {
                 () => {
                     Error = "";
                     if (SelectedRoom == null) {//If no room is selected
+                        
                         Error = "Please select a room";
                         return;
                     } else if (String.IsNullOrEmpty(NewBoxName)) { //If name field is empty. Not needed?
@@ -79,11 +80,16 @@ namespace iab330.ViewModels {
             );
 
             RemoveBoxCommand = new Command<Box>(
-                (box) => {
-                    Boxes.Remove(box);
-                    boxDataAccess.DeleteBox(box);
-                    //May need to improve this
-                    ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                async (box) =>
+                {
+                    bool answer = await Application.Current.MainPage.DisplayAlert("Delete Box", "Are you sure you want to delete box?", "Yes", "No");
+                    if (answer)
+                    {
+                        Boxes.Remove(box);
+                        boxDataAccess.DeleteBox(box);
+                        //May need to improve this
+                        ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                    }
                 }
             );
 

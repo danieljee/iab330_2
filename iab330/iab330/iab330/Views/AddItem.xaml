@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="iab330.Views.AddItem">
+             x:Class="iab330.Views.AddItem"
+             Title="Adding New Item">
     <ContentPage.Content>
-        <StackLayout x:Name="AddItemPage">
+        <StackLayout x:Name="AddItemPage"
+                     WidthRequest="300"
+                     HorizontalOptions="CenterAndExpand">
             <Entry x:Name="itemName" Placeholder="Item Name" Text="{Binding NewItemName, Mode=TwoWay}"/>
             <Entry x:Name="quantity" Placeholder="Quantity" Text="{Binding NewItemQuantity, Mode=TwoWay}"/>
             <Picker x:Name="boxes" Title="Select Box" ItemsSource="{Binding Boxes}" ItemDisplayBinding="{Binding Name}"
@@ -11,7 +14,7 @@
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="addItemButton" Text="Add" Command="{Binding CreateItemCommand}"/>
+            <Button x:Name="addItemButton" Text="Add" Command="{Binding CreateItemCommand}" BackgroundColor="Coral"/>
             <Label x:Name="error" Text="{Binding Error}"></Label>
         </StackLayout>
     </ContentPage.Content>

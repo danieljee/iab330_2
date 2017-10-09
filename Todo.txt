@@ -3,3 +3,20 @@
 2. Make sure ObservableCollection is notified when children are deleted
 
 3. Clicking individual box in manage boxes page. Each box instance will not load the room info
+
+
+
+
+
+
+Bugs Found:
+1. Editing an item: Can't change quantity without changing either room type or name as well.
+2. When editing item, items are updated after page is refreshed (i.e. you go back)
+3. Long item/room names will appear out of its list. Need to either extend list row or cap number of characters.
+4. When editing a room type, changing the name will show the "editted" label however, label still displays after going back
+4. When editing a box, changing the name will show the "editted" label however, label still displays after going back (Can fix by using a toast message perhaps?)
+5. No validation to check if box already exists (i.e. has same name AND same room)
+6. Add button on edit box page does not work
+7. Editing box details only update when page updates	
+8. Search only works on finding items, need to add to search for room types and box name as well.
+9. When deleting an item on search page, the item only disappears after refreshing screen.

@@ -49,16 +49,20 @@ namespace iab330.ViewModels {
             );
 
             this.RemoveRoomCommand = new Command<Room>(
-                (room) => {
-                    this.Rooms.Remove(room);
-                    roomDataAccess.DeleteRoom(room);
-                    /*
-                     * Update Boxes ObservableCollection.
-                     * Is there a better way to update the collection
-                     * without reassigning it? 
-                     */ 
-                    ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
-                    ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                async (room) => {
+                    bool answer = await Application.Current.MainPage.DisplayAlert("Delete Room", "Are you sure you want to delete room?", "Yes", "No");
+                    if (answer)
+                    {
+                        this.Rooms.Remove(room);
+                        roomDataAccess.DeleteRoom(room);
+                        /*
+                         * Update Boxes ObservableCollection.
+                         * Is there a better way to update the collection
+                         * without reassigning it? 
+                         */
+                        ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
+                        ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                    }
                 }
             );
 
