@@ -39,7 +39,8 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Label Text="{Binding Name}" 
+                                <Label AutomationId="NameRow"
+                                    Text="{Binding Name}" 
                                        Grid.Row="0" 
                                        Grid.Column="0"
                                        FontSize="Medium"/>
