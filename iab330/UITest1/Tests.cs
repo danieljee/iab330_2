@@ -26,7 +26,7 @@ namespace UITest1
         }
 
         [Test]
-        public void AppLaunches()
+        public void roomPage()
         {
             app.Tap("addRoomButton");
             app.Tap("roomName");
@@ -35,6 +35,14 @@ namespace UITest1
             app.Tap("addRoomButton");
             app.WaitForElement(x => x.Marked("NameRow").Text("room3"));
             //app.Screenshot("First screen.");
+
+
+        }
+        [Test]
+        public void boxPage()
+        {
+            app.Tap("manageBoxesButton");
+
         }
     }
 }
