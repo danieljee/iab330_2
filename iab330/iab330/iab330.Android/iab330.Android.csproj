@@ -40,22 +40,11 @@
     <WarningLevel>4</WarningLevel>
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 046e67a13d7b45f5ba6b50de4bab21a06616c738
+
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <BundleAssemblies>false</BundleAssemblies>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
-=======
->>>>>>> 88d9d439d4601c212859941f7a3f2f6566d2d384
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 88d9d439d4601c212859941f7a3f2f6566d2d384
->>>>>>> 046e67a13d7b45f5ba6b50de4bab21a06616c738
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CodeMill.VMFirstNav, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
