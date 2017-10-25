@@ -6,7 +6,8 @@
     <ContentPage.Content>
         <StackLayout>
             <Image Source="logo.png"/>
-            <Button x:Name= "addRoomButton" 
+            <Button AutomationId="addRoomButton" 
+                    x:Name= "addRoomButton" 
                     Text="Add/Remove Room"
                     FontSize="20"
                     HeightRequest="80"

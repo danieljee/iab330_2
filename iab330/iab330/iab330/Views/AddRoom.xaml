@@ -6,14 +6,16 @@
              Title="Add New Room">
     <ContentPage.Content>
         <StackLayout>
-            <Entry x:Name="roomName" 
+            <Entry AutomationId="roomName"
+                   x:Name="roomName" 
                    Placeholder="Room Name" 
                    WidthRequest="300"
                    HeightRequest="50"
                    HorizontalOptions="Center"
                    VerticalOptions="CenterAndExpand" 
                    Text="{Binding NewRoomName, Mode=TwoWay}"/>
-            <Button x:Name="addRoomButton" 
+            <Button AutomationId="addRoomButton" 
+                    x:Name="addRoomButton" 
                     Text="Add" 
                     WidthRequest="300"
                     HeightRequest="50"
@@ -22,7 +24,8 @@
                     BackgroundColor="Lime"
                     Command="{Binding AddRoomCommand}"/>
             <Label Text="{Binding Error}"></Label>
-            <ListView x:Name="roomsListView" 
+            <ListView AutomationId="roomsListView"
+                      x:Name="roomsListView" 
                       WidthRequest="300"
                       HorizontalOptions="Center"
                       VerticalOptions="CenterAndExpand" 

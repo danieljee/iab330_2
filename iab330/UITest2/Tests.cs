@@ -28,7 +28,13 @@ namespace UITest2
         [Test]
         public void AppLaunches()
         {
-            app.Screenshot("First screen.");
+            //app.Screenshot("First screen.");
+            app.Tap("addRoomButton");
+            app.Tap("roomName");
+            app.EnterText("room test");
+            app.Back();
+            app.Tap("addRoomButton");
+            app.WaitForElement(x => x.Marked("roomsListView"));
         }
     }
 }
