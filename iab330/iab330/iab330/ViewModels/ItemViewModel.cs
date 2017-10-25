@@ -15,10 +15,12 @@ namespace iab330.ViewModels {
         private IEnumerable<Item> _searchResult;
         private ItemDataAccess itemDataAccess;
         private BoxDataAccess boxDataAccess;
+        private RoomDataAccess roomDataAccess;
         private string _error;
         private string _newItemName;
         private string _newItemQuantity;
         private Box _selectedBox = null;
+        private string _searchCriteria = "Item";
         private Item _itemToBeEdited;
         private string _searchQuery = "";
 
@@ -37,6 +39,7 @@ namespace iab330.ViewModels {
         public ItemViewModel() {
             itemDataAccess = DataAccessLocator.ItemDataAccess;
             boxDataAccess = DataAccessLocator.BoxDataAccess;
+            roomDataAccess = DataAccessLocator.RoomDataAccess;
             Items = itemDataAccess.GetAllItems();
             //Items = getItemsFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
 
@@ -135,8 +138,13 @@ namespace iab330.ViewModels {
 
             SearchCommand = new Command(
                 () => {
-                    SearchResult = Items.Where(item => item.Name.StartsWith(SearchQuery));
-
+                    if (_searchCriteria == "Item") {
+                        SearchResult = Items.Where(item => item.Name.StartsWith(SearchQuery));
+                    } else if (_searchCriteria == "Box") {
+                        SearchResult = Items.Where(item => boxDataAccess.GetBox(item.BoxId).Name.StartsWith(SearchQuery));
+                    } else {
+                        SearchResult = Items.Where(item => roomDataAccess.GetRoom(boxDataAccess.GetBox(item.BoxId).RoomId).Name.StartsWith(SearchQuery));
+                    }
                 }
             );
         }
@@ -235,5 +243,14 @@ namespace iab330.ViewModels {
             }
         }
 
+        public string SelectedCriteria {
+            get { return _searchCriteria; }
+            set {
+                if(_searchQuery != value) {
+                    _searchCriteria = value;
+                    OnPropertyChanged("SelectedCriteria");
+                }
+            }
+        }
     }
 }

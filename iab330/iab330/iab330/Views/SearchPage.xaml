@@ -6,6 +6,14 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center"
                      WidthRequest="300">
+            <Picker x:Name="searchCriteria" Title="Search By"
+                    SelectedItem="{Binding SelectedCriteria, Mode=TwoWay}">
+                <Picker.Items>
+                    <x:String>Item</x:String>
+                    <x:String>Box</x:String>
+                    <x:String>Room</x:String>
+                </Picker.Items>
+            </Picker>
             <Entry x:Name="searchQuery" Placeholder="Enter Text Here" Text="{Binding SearchQuery, Mode=TwoWay}"/>
             <Label Text="{Binding SearchQuery}"/>
             <Button x:Name="searchButton" Text="Search" Command="{Binding SearchCommand}" BackgroundColor="Coral"/>
