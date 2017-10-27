@@ -4,8 +4,6 @@
              x:Class="iab330.Views.HelpScreen"
              Title="Help">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            
-        </StackLayout>
+        
     </ContentPage.Content>
 </ContentPage>
