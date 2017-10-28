@@ -14,6 +14,7 @@ namespace iab330.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class AddItem : ContentPage
 	{
+        // Initializes the page and bindings
 		public AddItem ()
 		{
 			InitializeComponent ();

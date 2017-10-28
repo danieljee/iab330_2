@@ -28,16 +28,12 @@ namespace iab330.Views
             base.OnDisappearing();
             searchQuery.Text = "";
         }
-
+        // Navigate to add item page
         private void AddButton_Clicked(object sender, EventArgs e) {
             Navigation.PushAsync(new AddItem());
         }
 
-        //Remove this. Move this to viewmodel
-        private void SearchButton_Clicked(object sender, EventArgs e) {
-            var query = searchQuery.Text;
-        }
-
+        // Navigate to selected item page
         private void SearchResult_ItemSelected(object sender, SelectedItemChangedEventArgs e) {
             Navigation.PushAsync(new EditItem());
         }

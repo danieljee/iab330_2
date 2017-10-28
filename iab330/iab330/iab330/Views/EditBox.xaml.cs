@@ -14,11 +14,13 @@ namespace iab330.Views {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EditBox : ContentPage {
 
+        // Initialize page and bindings
         public EditBox() {
             InitializeComponent();
             EditBoxPage.BindingContext = ViewModelLocator.BoxViewModel;
             roomType.BindingContext = ViewModelLocator.RoomsViewModel;
         }
+        // Button command to navigate to add item page
         private void addItemButton_Clicked(object sender, EventArgs e) {
             Navigation.PushAsync(new AddItem());
         }

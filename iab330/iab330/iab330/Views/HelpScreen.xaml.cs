@@ -14,9 +14,12 @@ namespace iab330.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HelpScreen : ContentPage
 	{
+        // Initialize page 
         public HelpScreen()
         {
             InitializeComponent();
+
+            // Read text from help file and display as a label
             var assembly = typeof(HelpScreen).GetTypeInfo().Assembly;
             Stream stream = assembly.GetManifestResourceStream("iab330.help.txt");
             string text = "";

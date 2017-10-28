@@ -14,6 +14,7 @@ namespace iab330.Droid
 {
     public class CreateLabel : ICreateLabel
     {
+        // Task to create a label text file and read from it
         public async Task SaveFile(string boxName, string roomType, string items)
         {
 

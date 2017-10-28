@@ -16,8 +16,8 @@ namespace iab330.Views
         public ManageBoxScreen()
         {
             InitializeComponent();
-            
         }
+
 
         protected override void OnAppearing() {
             base.OnAppearing();

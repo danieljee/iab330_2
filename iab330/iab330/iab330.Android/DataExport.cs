@@ -13,6 +13,7 @@ namespace iab330.Droid
 {
     public class DataExport : IDataExport
     {
+        // Generates a list of items text file and displays alert when completed
         public async Task ExportData(string itemList)
         {
             var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
