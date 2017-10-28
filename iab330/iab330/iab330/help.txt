@@ -1,0 +1,24 @@
+﻿How To Use "Where's My Stuff?"
+
+1. Setting up your first room type:
+Before you can add boxes, you will need to set up rooms. Room types can be added via the "Add/Remove Room" button on the home screen. From here, simply type in the name of the room and click "Add". The new room type is now ready to use.
+
+2. Setting up your first box:
+In order to add items to a box, you will need to create a box. This requires you to have already created at least 1 room type. From the home screen, select "Manage Boxes". On the next screen, follow the prompts and click "Create Box". You have now created a new box.
+
+3. Searching and adding items:
+From the home screen, select "Search". On the next screen, you can search for items by selecting the search criteria and typing in the input field. Once submitted, the list will update with all items relevant. Additionally, you can add items from this screen by clicking "Add Item" button.
+
+4. Editing a room:
+While in the "Add/Remove Room" screen, you can tap on a room listed to edit the name of that room type. You can also tap the delete button to remove that room. Please note removing the room will remove all boxes associated with that room type.
+
+5. Editing a box:
+While in the "Manage Boxes" screen, you can tap the delete button to remove the box or tap a box listed to begin editing. You will be able to change the name of the box as well as change the room type. You can also see a list of items currently in this box.
+
+6. Editing an item:
+While in the "Search" page, all items listed can be deleted with the delete button. Additionally, you can tap an item to edit it. You will be able to change its name and move it to other boxes as well.
+
+7. Print label:
+
+
+8. Export data:

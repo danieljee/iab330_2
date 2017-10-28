@@ -4,8 +4,9 @@
              x:Class="iab330.Views.HelpScreen"
              Title="Help">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            
-        </StackLayout>
+        <ScrollView Padding="20">
+            <Label x:Name="helpText"
+                   VerticalOptions="StartAndExpand"/>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
