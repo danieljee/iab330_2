@@ -145,6 +145,10 @@ namespace iab330.ViewModels {
                     } else {
                         SearchResult = Items.Where(item => roomDataAccess.GetRoom(boxDataAccess.GetBox(item.BoxId).RoomId).Name.StartsWith(SearchQuery));
                     }
+
+                    foreach(var item in SearchResult) {
+                        item.Box.Room = roomDataAccess.GetRoom(item.Box.RoomId);
+                    }
                 }
             );
         }

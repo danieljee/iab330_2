@@ -16,11 +16,11 @@ namespace iab330.Views
 		public SearchPage ()
 		{
 			InitializeComponent ();
-            BindingContext = ViewModelLocator.ItemViewModel;
         }
 
         protected override void OnAppearing() {
             base.OnAppearing();
+            BindingContext = ViewModelLocator.ItemViewModel;
             searchButton.Command.Execute(null);
         }
 

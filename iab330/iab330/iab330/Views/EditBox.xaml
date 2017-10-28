@@ -34,7 +34,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button x:Name="addItemButton" Text="Add Item" BackgroundColor="SkyBlue"/>
+            <Button x:Name="addItemButton" Text="Add Item" BackgroundColor="SkyBlue" Clicked="addItemButton_Clicked"/>
             <Button x:Name="printLabelButton" Text="Print Label" BackgroundColor="SkyBlue"/>
         </StackLayout>
     </ContentPage.Content>

@@ -39,7 +39,7 @@
                                 <Label Text="{Binding Box.Name, StringFormat='Box: &#10;{0}'}"
                                        Grid.Row="0"
                                        Grid.Column="2"/>
-                                <Label Text="{Binding Box.Room, StringFormat='Room: &#10;{0}'}"
+                                <Label Text="{Binding Box.Room.Name, StringFormat='Room: &#10;{0}'}"
                                        Grid.Row="0"
                                        Grid.Column="3"/>
                                 <Button Image="bin.png" 

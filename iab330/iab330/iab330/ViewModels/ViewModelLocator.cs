@@ -17,6 +17,7 @@ namespace iab330.ViewModels {
                 if (_roomsViewModel == null) {
                     _roomsViewModel = new RoomsViewModel();
                 }
+                _roomsViewModel.Error = "";
                 return _roomsViewModel;
             }
         }
@@ -26,6 +27,7 @@ namespace iab330.ViewModels {
                 if (_boxViewModel == null) {
                     _boxViewModel = new BoxViewModel();
                 }
+                _boxViewModel.Error = "";
                 return _boxViewModel;
             }
         }
@@ -35,6 +37,7 @@ namespace iab330.ViewModels {
                 if (_itemViewModel == null) {
                     _itemViewModel = new ItemViewModel();
                 }
+                _itemViewModel.Error = "";
                 return _itemViewModel;
             }
         }
