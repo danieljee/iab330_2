@@ -1,4 +1,5 @@
-﻿using iab330.Models;
+﻿using iab330.Interfaces;
+using iab330.Models;
 using iab330.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,6 @@ namespace iab330.Views {
             EditBoxPage.BindingContext = ViewModelLocator.BoxViewModel;
             roomType.BindingContext = ViewModelLocator.RoomsViewModel;
         }
-
         private void addItemButton_Clicked(object sender, EventArgs e) {
             Navigation.PushAsync(new AddItem());
         }

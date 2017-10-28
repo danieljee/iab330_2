@@ -46,7 +46,8 @@
                                        Grid.Row="0" 
                                        Grid.Column="0"
                                        FontSize="Medium"/>
-                                <Button x:Name="removeRoomButton" 
+                                <Button AutomationId="removeRoomButton"
+                                        x:Name="removeRoomButton" 
                                         Grid.Row="0" 
                                         Grid.Column="1"
                                         Image="bin.png"

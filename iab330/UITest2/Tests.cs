@@ -26,7 +26,7 @@ namespace UITest2
         }
 
         [Test]
-        public void AppLaunches()
+        public void AddNewRoom()
         {
             //app.Screenshot("First screen.");
             app.Tap("addRoomButton");
@@ -34,6 +34,21 @@ namespace UITest2
             app.EnterText("room test");
             app.Back();
             app.Tap("addRoomButton");
+            app.WaitForElement(x => x.Marked("roomsListView"));
+        }
+
+        [Test]
+        public void RemoveRoom()
+        {
+            //app.Screenshot("First screen.");
+            app.Tap("addRoomButton");
+            app.Tap("roomName");
+            app.EnterText("room test");
+            app.Back();
+            app.Tap("addRoomButton");
+            //app.Query(q => q.Id("roomsListView").Child()).Length;
+            app.Tap(x => x.Marked("removeRoomButton"));
+            
             app.WaitForElement(x => x.Marked("roomsListView"));
         }
     }
