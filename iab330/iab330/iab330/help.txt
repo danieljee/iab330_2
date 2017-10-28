@@ -19,6 +19,7 @@ While in the "Manage Boxes" screen, you can tap the delete button to remove the 
 While in the "Search" page, all items listed can be deleted with the delete button. Additionally, you can tap an item to edit it. You will be able to change its name and move it to other boxes as well.
 
 7. Print label:
-
+When viewing a particular box's details, there will be a button at the bottom to print a label. Clicking this will generate a text file which users can print to apply to a box. The file will be saved in the root directory of the application data.
 
 8. Export data:
+While on the search page, users can select to export data by clicking "Export Data". This will generate a text file which contains all the listed items currently saved. The text file can also be imported into excel if desired. The file will be saved in the root directory of the application data.

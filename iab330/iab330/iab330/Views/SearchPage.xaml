@@ -55,6 +55,7 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button Clicked="AddButton_Clicked" Text="Add Item" BackgroundColor="Coral"/>
+            <Button Command="{Binding ExportDataCommand}" Text="Export Data" BackgroundColor="Coral"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

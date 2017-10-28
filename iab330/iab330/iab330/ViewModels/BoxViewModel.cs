@@ -95,7 +95,7 @@ namespace iab330.ViewModels {
                         Boxes.Remove(box);
                         boxDataAccess.DeleteBox(box);
                         //May need to improve this
-                        ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                        ViewModelLocator.ItemViewModel.ItemsToBeEdited = itemDataAccess.GetAllItems();
                     }
                 }
             );
@@ -125,7 +125,7 @@ namespace iab330.ViewModels {
                     NewBoxName = "";
                     Error = "Edited!";
                     Boxes = boxDataAccess.GetAllBoxes();
-                    ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                    ViewModelLocator.ItemViewModel.ItemsToBeEdited = itemDataAccess.GetAllItems();
                 }
             );
 

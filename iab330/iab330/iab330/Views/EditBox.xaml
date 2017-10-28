@@ -36,7 +36,6 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-
             <Button x:Name="addItemButton" Text="Add Item" BackgroundColor="SkyBlue" Clicked="addItemButton_Clicked"/>
             <Button x:Name="printLabelButton" Text="Print Label" Command="{Binding PrintLabelCommand}" BackgroundColor="SkyBlue"/>
         </StackLayout>

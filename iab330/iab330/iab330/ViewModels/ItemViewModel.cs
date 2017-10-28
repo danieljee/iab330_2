@@ -1,4 +1,5 @@
-﻿using iab330.Models;
+﻿using iab330.Interfaces;
+using iab330.Models;
 using iab330.Services;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace iab330.ViewModels {
             itemDataAccess = DataAccessLocator.ItemDataAccess;
             boxDataAccess = DataAccessLocator.BoxDataAccess;
             roomDataAccess = DataAccessLocator.RoomDataAccess;
-            Items = itemDataAccess.GetAllItems();
+            ItemsToBeEdited = itemDataAccess.GetAllItems();
             //Items = getItemsFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
 
             CreateItemCommand = new Command(
@@ -78,7 +79,7 @@ namespace iab330.ViewModels {
                     }
 
                     boxDataAccess.EstablishForeignKey(SelectedBox);
-                    Items.Add(newItem);
+                    ItemsToBeEdited.Add(newItem);
                     ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
                     Error = "Item added!";
                     SelectedBox = null;
@@ -96,7 +97,7 @@ namespace iab330.ViewModels {
                     bool answer = await Application.Current.MainPage.DisplayAlert("Delete Item", "Are you sure you want to delete item?", "Yes", "No");
                     if (answer)
                     {
-                        Items.Remove(item);
+                        ItemsToBeEdited.Remove(item);
                         itemDataAccess.DeleteItem(item);
                     }
                 }
@@ -127,7 +128,7 @@ namespace iab330.ViewModels {
                         }
                         boxDataAccess.EstablishForeignKey(SelectedBox);
                     }
-                    Items = itemDataAccess.GetAllItems();
+                    ItemsToBeEdited = itemDataAccess.GetAllItems();
                     ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
                     NewItemName = "";
                     NewItemQuantity = "";
@@ -139,16 +140,31 @@ namespace iab330.ViewModels {
             SearchCommand = new Command(
                 () => {
                     if (_searchCriteria == "Item") {
-                        SearchResult = Items.Where(item => item.Name.StartsWith(SearchQuery));
+                        SearchResult = ItemsToBeEdited.Where(item => item.Name.StartsWith(SearchQuery));
                     } else if (_searchCriteria == "Box") {
-                        SearchResult = Items.Where(item => boxDataAccess.GetBox(item.BoxId).Name.StartsWith(SearchQuery));
+                        SearchResult = ItemsToBeEdited.Where(item => boxDataAccess.GetBox(item.BoxId).Name.StartsWith(SearchQuery));
                     } else {
-                        SearchResult = Items.Where(item => roomDataAccess.GetRoom(boxDataAccess.GetBox(item.BoxId).RoomId).Name.StartsWith(SearchQuery));
+                        SearchResult = ItemsToBeEdited.Where(item => roomDataAccess.GetRoom(boxDataAccess.GetBox(item.BoxId).RoomId).Name.StartsWith(SearchQuery));
                     }
 
                     foreach(var item in SearchResult) {
                         item.Box.Room = roomDataAccess.GetRoom(item.Box.RoomId);
                     }
+                }
+            );
+
+            ExportDataCommand = new Command(
+                () =>
+                {
+                    var fileService = DependencyService.Get<IDataExport>();
+                    string itemList = "Room Type, Box Name, Item Name, Qty" + Environment.NewLine;
+                    var range = _items.Count;
+                    for (int index = 0; index < range; index++)
+                    {
+                        itemList += _items[index].Box.Room.Name + ", " + _items[index].Box.Name + ", " + _items[index].Name + ", " + _items[index].Quantity + ", " + Environment.NewLine;
+                    }
+
+                    fileService.ExportData(itemList);
                 }
             );
         }
@@ -157,7 +173,7 @@ namespace iab330.ViewModels {
         public ICommand RemoveItemCommand { protected set; get; }
         public ICommand UpdateItemCommand { protected set; get; }
         public ICommand SearchCommand { protected set; get; }
-
+        public ICommand ExportDataCommand { protected set; get; }
         public Item ItemToBeEdited {
             get {
                 return _itemToBeEdited;
@@ -195,7 +211,7 @@ namespace iab330.ViewModels {
             }
         }
 
-        public ObservableCollection<Item> Items {
+        public ObservableCollection<Item> ItemsToBeEdited {
             get { return _items; }
             set {
                 if (_items != value) {

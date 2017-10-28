@@ -63,7 +63,7 @@ namespace iab330.ViewModels {
                          * without reassigning it? 
                          */
                         ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
-                        ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
+                        ViewModelLocator.ItemViewModel.ItemsToBeEdited = itemDataAccess.GetAllItems();
                     }
                 }
             );
