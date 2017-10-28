@@ -19,8 +19,8 @@ namespace UITest2
             }
 
             return ConfigureApp
-                .iOS
-                .StartApp();
+               .iOS
+               .StartApp();
         }
     }
 }
