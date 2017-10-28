@@ -1,4 +1,5 @@
-﻿using iab330.Services;
+﻿using iab330.Interfaces;
+using iab330.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -127,12 +128,29 @@ namespace iab330.ViewModels {
                     ViewModelLocator.ItemViewModel.Items = itemDataAccess.GetAllItems();
                 }
             );
+
+            PrintLabelCommand = new Command(
+                () =>
+                {
+                    var fileService = DependencyService.Get<ICreateLabel>();
+                    string itemList = "";
+                    var range = BoxToBeEdited.Items.Count;
+                    for (int index = 0; index < range; index++)
+                    {
+                        itemList += "Item Name: " + BoxToBeEdited.Items[index].Name + ", Qty: " + BoxToBeEdited.Items[index].Quantity + Environment.NewLine;
+                    }
+                    string boxName = "Box Name: " + BoxToBeEdited.Name;
+                    string roomName = "Room Type: " + BoxToBeEdited.Room.Name;
+
+                    fileService.SaveFile(boxName, roomName, itemList);
+                }
+            );
         }
 
         public ICommand CreateBoxCommand { protected set; get; }
         public ICommand RemoveBoxCommand { protected set; get; }
         public ICommand UpdateBoxCommand { protected set; get; }
-
+        public ICommand PrintLabelCommand { protected set; get; }
         public ObservableCollection<Box> Boxes {
             get { return _boxes; }
             set {
@@ -186,7 +204,5 @@ namespace iab330.ViewModels {
                 }
             }
         }
-
-
     }
 }
