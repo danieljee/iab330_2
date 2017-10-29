@@ -81,8 +81,8 @@ namespace iab330.ViewModels {
                     boxDataAccess.EstablishForeignKey(SelectedBox);
                     ItemsToBeEdited.Add(newItem);
 
-                    if (ViewModelLocator.BoxViewModel.BoxToBeEdited.Id == SelectedBox.Id) {
-                        ViewModelLocator.BoxViewModel.BoxToBeEditedItems = ItemsToBeEdited;
+                    if ((ViewModelLocator.BoxViewModel.BoxToBeEdited != null) && (ViewModelLocator.BoxViewModel.BoxToBeEdited.Id == SelectedBox.Id)) {
+                        ViewModelLocator.BoxViewModel.BoxToBeEditedItems.Add(newItem);
                     }
                     Error = "Item added!";
                     SelectedBox = null;
