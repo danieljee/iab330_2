@@ -109,6 +109,7 @@ namespace iab330.ViewModels {
                     if (!string.IsNullOrEmpty(NewBoxName)) {
                         //Should I prevent duplicate box name?
                         BoxToBeEditedName = NewBoxName;
+                        BoxToBeEdited.Name = NewBoxName;
                         boxDataAccess.UpdateBox(BoxToBeEdited);
                     }
 
@@ -124,6 +125,7 @@ namespace iab330.ViewModels {
                             SelectedRoom.Boxes.Add(BoxToBeEdited);
                         }
                         BoxToBeEditedRoomName = SelectedRoom.Name;
+                        BoxToBeEdited.Room.Name = SelectedRoom.Name;
                         roomDataAccess.EstablishForeignKey(SelectedRoom);
                     }
 
