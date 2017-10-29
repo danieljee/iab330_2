@@ -79,6 +79,7 @@ namespace iab330.ViewModels {
                         SelectedRoom.Boxes.Add(newBox);
                     }
                     roomDataAccess.EstablishForeignKey(SelectedRoom);
+                    newBox.Items = new List<Item>();
                     Boxes.Add(newBox);
 
                     NewBoxName = "";
