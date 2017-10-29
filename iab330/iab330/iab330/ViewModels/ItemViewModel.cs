@@ -42,6 +42,7 @@ namespace iab330.ViewModels {
             boxDataAccess = DataAccessLocator.BoxDataAccess;
             roomDataAccess = DataAccessLocator.RoomDataAccess;
             ItemsToBeEdited = itemDataAccess.GetAllItems();
+
             //Items = getItemsFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
 
             CreateItemCommand = new Command(
@@ -72,15 +73,17 @@ namespace iab330.ViewModels {
                     };
                     itemDataAccess.InsertItem(newItem);
 
-                    if(SelectedBox.Items == null) {
+                    if (SelectedBox.Items == null) {
                         SelectedBox.Items = new List<Item> { newItem };
                     } else {
                         SelectedBox.Items.Add(newItem);
                     }
-
                     boxDataAccess.EstablishForeignKey(SelectedBox);
                     ItemsToBeEdited.Add(newItem);
-                    ViewModelLocator.BoxViewModel.Boxes = boxDataAccess.GetAllBoxes();
+
+                    if (ViewModelLocator.BoxViewModel.BoxToBeEdited.Id == SelectedBox.Id) {
+                        ViewModelLocator.BoxViewModel.BoxToBeEditedItems = ItemsToBeEdited;
+                    }
                     Error = "Item added!";
                     SelectedBox = null;
                     NewItemName = "";
@@ -99,6 +102,7 @@ namespace iab330.ViewModels {
                     {
                         ItemsToBeEdited.Remove(item);
                         itemDataAccess.DeleteItem(item);
+                        SearchCommand.Execute(null);
                     }
                 }
             );

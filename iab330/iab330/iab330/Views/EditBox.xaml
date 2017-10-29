@@ -7,9 +7,9 @@
         <StackLayout x:Name="EditBoxPage"
                      HorizontalOptions="Center"
                      WidthRequest="300">
-            <Label x:Name="currentBox" Text="{Binding BoxToBeEdited.Name, StringFormat='Box: {0}'}"/>
+            <Label x:Name="currentBox" Text="{Binding BoxToBeEditedName, StringFormat='Box: {0}'}"/>
             <Entry x:Name="boxName" Placeholder="New Box Name" Text="{Binding NewBoxName, Mode=TwoWay}"/>
-            <Label x:Name="currentRoom" Text="{Binding BoxToBeEdited.Room.Name, StringFormat='Room: {0}'}"/>
+            <Label x:Name="currentRoom" Text="{Binding BoxToBeEditedRoomName, StringFormat='Room: {0}'}"/>
             <Picker x:Name="roomType" Title="Select Room Type" ItemsSource="{Binding Rooms}"  SelectedItem="{Binding Path=BindingContext.SelectedRoom, Source={x:Reference Name=currentBox}, Mode=OneWayToSource}" ItemDisplayBinding="{Binding Name}">
                 <Picker.Items>
                 </Picker.Items>
@@ -17,7 +17,7 @@
             <Button x:Name="editBoxButton" Text="Edit" Command="{Binding UpdateBoxCommand}" BackgroundColor="SkyBlue"/>
             <Label x:Name="error" Text="{Binding Error}"></Label>
             <Label Text="List of Items in Box:"/>
-            <ListView x:Name="items" ItemsSource="{Binding BoxToBeEdited.Items}">
+            <ListView x:Name="items" ItemsSource="{Binding BoxToBeEditedItems}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

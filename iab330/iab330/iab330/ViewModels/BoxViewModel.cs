@@ -1,4 +1,5 @@
 ﻿using iab330.Interfaces;
+using iab330.Models;
 using iab330.Services;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,9 @@ namespace iab330.ViewModels {
         private Room _selectedRoom = null;
 
         private Box _boxToBeEdited;
-
+        private string _boxToBeEditedName;
+        private string _boxToBeEditedRoomName;
+        private ObservableCollection<Item> _boxToBeEditedItems;
         /*
          * At the moment, this is the only way to get a collection of boxes with Room property referencing rooms.
          * When an element is loaded into memory either through database.get method or query, 
@@ -104,7 +107,7 @@ namespace iab330.ViewModels {
                 () => {
                     if (!string.IsNullOrEmpty(NewBoxName)) {
                         //Should I prevent duplicate box name?
-                        BoxToBeEdited.Name = NewBoxName;
+                        BoxToBeEditedName = NewBoxName;
                         boxDataAccess.UpdateBox(BoxToBeEdited);
                     }
 
@@ -119,8 +122,12 @@ namespace iab330.ViewModels {
                         } else {
                             SelectedRoom.Boxes.Add(BoxToBeEdited);
                         }
+                        BoxToBeEditedRoomName = SelectedRoom.Name;
                         roomDataAccess.EstablishForeignKey(SelectedRoom);
                     }
+
+                    
+
                     SelectedRoom = null;
                     NewBoxName = "";
                     Error = "Edited!";
@@ -170,6 +177,36 @@ namespace iab330.ViewModels {
                 }
             }
         }
+        
+
+        public string BoxToBeEditedName {
+            get { return _boxToBeEditedName; }
+            set {
+                if (_boxToBeEditedName != value) {
+                    _boxToBeEditedName = value;
+                    OnPropertyChanged("BoxToBeEditedName");
+                }
+            }
+        }
+
+        public string BoxToBeEditedRoomName {
+            get { return _boxToBeEditedRoomName; }
+            set {
+                if (_boxToBeEditedRoomName != value) {
+                    _boxToBeEditedRoomName = value;
+                    OnPropertyChanged("BoxToBeEditedRoomName");
+                }
+            }
+        }
+        public ObservableCollection<Item> BoxToBeEditedItems {
+            get { return _boxToBeEditedItems; }
+            set {
+                if (_boxToBeEditedItems != value) {
+                    _boxToBeEditedItems = value;
+                    OnPropertyChanged("BoxToBeEditedItems");
+                }
+            }
+        }
 
         public string NewBoxName {
             get { return _newBoxName; }
@@ -200,6 +237,11 @@ namespace iab330.ViewModels {
             set {
                 if (_boxToBeEdited != value) {
                     _boxToBeEdited = value;
+                    if (_boxToBeEdited != null) {
+                        BoxToBeEditedName = _boxToBeEdited.Name;
+                        BoxToBeEditedRoomName = _boxToBeEdited.Room.Name;
+                        BoxToBeEditedItems = new ObservableCollection<Item>(_boxToBeEdited.Items);
+                    }
                     OnPropertyChanged("BoxToBeEdited");
                 }
             }

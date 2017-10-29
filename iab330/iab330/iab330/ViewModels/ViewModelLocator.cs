@@ -28,6 +28,7 @@ namespace iab330.ViewModels {
                     _boxViewModel = new BoxViewModel();
                 }
                 _boxViewModel.Error = "";
+
                 return _boxViewModel;
             }
         }
