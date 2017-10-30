@@ -9,16 +9,18 @@
                      VerticalOptions="CenterAndExpand"
                      WidthRequest="300">
             <Label Text="Add new boxes here:" />
-            <Entry x:Name="boxName"
+            <Entry AutomationId="boxName"
+                   x:Name="boxName"
                    Placeholder="Enter Box Name Here" 
                    Text="{Binding Path=BindingContext.NewBoxName, Source={x:Reference Name=boxList}, Mode=TwoWay}"/>
             <Label Text="Room Type:" />
-            <Picker x:Name="roomType" Title="Select Room Type" ItemsSource="{Binding Rooms}"  SelectedItem="{Binding Path=BindingContext.SelectedRoom, Source={x:Reference Name=boxList}, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}">
+            <Picker AutomationId="roomType" x:Name="roomType" Title="Select Room Type" ItemsSource="{Binding Rooms}"  SelectedItem="{Binding Path=BindingContext.SelectedRoom, Source={x:Reference Name=boxList}, Mode=TwoWay}" ItemDisplayBinding="{Binding Name}">
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
 
-            <Button x:Name="createBox" 
+            <Button AutomationId="createBox"
+                    x:Name="createBox" 
                     BackgroundColor="SkyBlue"
                     WidthRequest="300"
                     HorizontalOptions="Center"

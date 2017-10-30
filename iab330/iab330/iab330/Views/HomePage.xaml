@@ -17,7 +17,8 @@
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand" 
                     Clicked="addRoomButton_Clicked"/>
-            <Button x:Name= "manageBoxesButton" 
+            <Button AutomationId="manageBoxesButton"
+                    x:Name= "manageBoxesButton" 
                     Text="Manage Boxes"
                     FontSize="20"
                     HeightRequest="80"

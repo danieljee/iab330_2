@@ -27,29 +27,51 @@ namespace UITest2
 
         [Test]
         public void AddNewRoom()
-        {
-            //app.Screenshot("First screen.");
+        {         
             app.Tap("addRoomButton");
             app.Tap("roomName");
             app.EnterText("room test");
             app.Back();
             app.Tap("addRoomButton");
-            app.WaitForElement(x => x.Marked("roomsListView"));
+            app.WaitForElement(x => x.Marked("room test"));
         }
 
         [Test]
-        public void RemoveRoom()
+        public void AddNewBox()
         {
-            //app.Screenshot("First screen.");
-            app.Tap("addRoomButton");
-            app.Tap("roomName");
-            app.EnterText("room test");
+            app.Tap("manageBoxesButton");
+            app.Tap("boxName");
+            app.EnterText("box test");
             app.Back();
-            app.Tap("addRoomButton");
-            //app.Query(q => q.Id("roomsListView").Child()).Length;
-            app.Tap(x => x.Marked("removeRoomButton"));
-            
-            app.WaitForElement(x => x.Marked("roomsListView"));
+            app.Tap("roomType");
+            app.WaitForElement(x => x.Marked("Kitchen"));
+            app.Tap("createBox");           
+            app.WaitForElement(x => x.Marked("box test"));
+        }
+
+        [Test]
+        public void AddNewItem()
+        {
+            app.Tap("manageBoxesButton");
+            app.Tap("boxName");
+            app.EnterText("box test");
+            app.Back();
+            app.Tap("roomType");
+            app.Tap(x => x.Marked("Kitchen"));
+            app.Tap("createBox");
+            app.Tap(x => x.Marked("box test"));
+            app.Tap("addItemButton");
+            app.Tap("itemName");
+            app.EnterText("item test");
+            app.Back();
+            app.Tap("quantity");
+            app.EnterText("1");
+            app.Back();
+            app.Tap("boxes");
+            app.Tap(x => x.Marked("box test"));
+            app.Tap("addItemButton");
+            app.Back();
+            app.WaitForElement(x => x.Marked("item test"));
         }
     }
 }

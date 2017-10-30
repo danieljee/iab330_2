@@ -14,7 +14,7 @@ namespace UITest2
             {
                 return ConfigureApp
                     .Android
-                    .ApkFile("C:/Users/Lenovo/Documents/Visual Studio 2017/Projects/iab330_2/iab330/iab330/iab330.Android/bin/Debug/com.companyname.iab330.apk")
+                    .ApkFile("../../iab330/iab330.Android/bin/Debug/com.companyname.iab330.apk")
                     .StartApp();
             }
 

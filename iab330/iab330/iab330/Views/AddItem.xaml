@@ -7,14 +7,14 @@
         <StackLayout x:Name="AddItemPage"
                      WidthRequest="300"
                      HorizontalOptions="CenterAndExpand">
-            <Entry x:Name="itemName" Placeholder="Item Name" Text="{Binding NewItemName, Mode=TwoWay}"/>
-            <Entry x:Name="quantity" Placeholder="Quantity" Text="{Binding NewItemQuantity, Mode=TwoWay}"/>
-            <Picker x:Name="boxes" Title="Select Box" ItemsSource="{Binding Boxes}" ItemDisplayBinding="{Binding Name}"
+            <Entry AutomationId="itemName" x:Name="itemName" Placeholder="Item Name" Text="{Binding NewItemName, Mode=TwoWay}"/>
+            <Entry AutomationId="quantity" x:Name="quantity" Placeholder="Quantity" Text="{Binding NewItemQuantity, Mode=TwoWay}"/>
+            <Picker AutomationId="boxes" x:Name="boxes" Title="Select Box" ItemsSource="{Binding Boxes}" ItemDisplayBinding="{Binding Name}"
                     SelectedItem="{Binding Path=BindingContext.SelectedBox, Source={x:Reference Name=AddItemPage}, Mode=TwoWay}">
                 <Picker.Items>
                 </Picker.Items>
             </Picker>
-            <Button x:Name="addItemButton" Text="Add" Command="{Binding CreateItemCommand}" BackgroundColor="Coral"/>
+            <Button AutomationId="addItemButton" x:Name="addItemButton" Text="Add" Command="{Binding CreateItemCommand}" BackgroundColor="Coral"/>
             <Label x:Name="error" Text="{Binding Error}"></Label>
         </StackLayout>
     </ContentPage.Content>
