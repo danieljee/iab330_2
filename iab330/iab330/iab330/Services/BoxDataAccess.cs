@@ -51,7 +51,7 @@ namespace iab330.Services {
             }
             return boxCollection;
         }
-
+        // Inserts a box object into database
         public bool InsertBox(Box box) {
             bool isSuccessful = false;
             try {
@@ -65,7 +65,7 @@ namespace iab330.Services {
             }
             return isSuccessful;
         }
-
+        // Returns a list of box objects based on search query
         public List<Box> SearchBox(string query) {
             List<Box> boxes = new List<Box>();
             try {
@@ -77,7 +77,7 @@ namespace iab330.Services {
             }
             return boxes;
         }
-
+        // Gets the box object based on ID
         public Box GetBox(int id) {
             Box box = new Box();
             try {
@@ -91,7 +91,7 @@ namespace iab330.Services {
             return box;
         }
 
-
+        // Gets box based on box name
         public Box GetBox(string name) {
             Box box = new Box();
             try {
@@ -104,7 +104,7 @@ namespace iab330.Services {
             }
             return box;
         }
-
+        // Updates box object
         public bool UpdateBox(Box box) {
             bool isSuccessful = false;
             try {
@@ -119,7 +119,7 @@ namespace iab330.Services {
             return isSuccessful;
         }
 
-        //D
+        //Deletes box object
         public bool DeleteBox(Box box) {
             bool isSuccessful = false;
             var id = box.Id;

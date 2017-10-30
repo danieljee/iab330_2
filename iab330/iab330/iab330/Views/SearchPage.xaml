@@ -24,7 +24,7 @@
                         <ViewCell>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2.5*" />
+                                    <ColumnDefinition Width="2.25*" />
                                     <ColumnDefinition Width="0.75*" />
                                     <ColumnDefinition Width="1.25*" />
                                     <ColumnDefinition Width="1.25*" />

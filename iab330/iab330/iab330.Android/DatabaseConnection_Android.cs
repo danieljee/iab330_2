@@ -14,6 +14,7 @@ using SQLite;
 
 [assembly: Xamarin.Forms.Dependency(typeof(iab330.Droid.DatabaseConnection_Android))]
 namespace iab330.Droid {
+    // Create DB on andoird and return the connection to it
     public class DatabaseConnection_Android: IDatabaseConnection {
         public SQLiteConnection DbConnection() {
             var dbName = "InventoryDb.db3";

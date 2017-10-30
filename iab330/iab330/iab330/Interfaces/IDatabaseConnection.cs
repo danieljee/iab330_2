@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace iab330 {
     public interface IDatabaseConnection {
+        // Creates connection to database
         SQLiteConnection DbConnection();
     }
 }

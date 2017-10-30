@@ -25,17 +25,7 @@ namespace iab330.ViewModels {
         private Item _itemToBeEdited;
         private string _searchQuery = "";
 
-        //public ObservableCollection<Item> getItemsFromRooms(ObservableCollection<Room> rooms) {
-        //    ObservableCollection<Item> items = new ObservableCollection<Item>();
-        //    foreach (Room room in rooms) {
-        //        foreach (Box box in room.Boxes) {
-        //            foreach (Item item in box.Items) {
-        //                items.Add(item);
-        //            }
-        //        }
-        //    }
-        //    return items;
-        //}
+
 
         public ItemViewModel() {
             itemDataAccess = DataAccessLocator.ItemDataAccess;
@@ -43,8 +33,7 @@ namespace iab330.ViewModels {
             roomDataAccess = DataAccessLocator.RoomDataAccess;
             ItemsToBeEdited = itemDataAccess.GetAllItems();
 
-            //Items = getItemsFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
-
+            // Creates a new item with the properties name, quantity and box then inserts into database
             CreateItemCommand = new Command(
                 () => {
                     Error = "";
@@ -69,7 +58,6 @@ namespace iab330.ViewModels {
                         var newItem = new Item {
                         Name = NewItemName,
                         Quantity = quantity,
-                        //BoxName = SelectedBox.Name
                     };
                     itemDataAccess.InsertItem(newItem);
 
@@ -93,7 +81,7 @@ namespace iab330.ViewModels {
                     return true;
                 }
             );
-
+            // Deletes an item when called
             RemoveItemCommand = new Command<Item>(
                 async (item) =>
                 {
@@ -106,7 +94,7 @@ namespace iab330.ViewModels {
                     }
                 }
             );
-
+            // Updates an item when called
             UpdateItemCommand = new Command(
                 () => {
                     Int32 quantity;
@@ -140,7 +128,7 @@ namespace iab330.ViewModels {
                     Error = "Edited!";
                 }
             );
-
+            //Search database for items based on: item name, box name and room type
             SearchCommand = new Command(
                 () => {
                     if (_searchCriteria == "Item") {
@@ -156,7 +144,7 @@ namespace iab330.ViewModels {
                     }
                 }
             );
-
+            // Exports all items in database to a text file located on devices data folder
             ExportDataCommand = new Command(
                 () =>
                 {

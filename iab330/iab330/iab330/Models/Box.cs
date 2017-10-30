@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace iab330 {
     [Table("Box")]
+    // Sets model variables for Box
     public class Box {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -19,8 +20,6 @@ namespace iab330 {
 
         [ForeignKey(typeof(Room))]
         public int RoomId { get; set; }
-
-        //public string RoomName { get; set; }
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Item> Items { get; set; }

@@ -64,7 +64,7 @@ namespace iab330 {
                 InsertRoom(new Room() { Name = "Storage Space 1" });
             }
         }
-        //C
+        //Creates a new room in database by the specified query
         public bool InsertRoom(Room room) {
             bool isSuccessful = false;
             try {
@@ -78,7 +78,7 @@ namespace iab330 {
             return isSuccessful;
         }
 
-        //R
+        //Retrieves database items with the room type specified
         public List<Room> SearchRoom(string query) {
             List<Room> rooms = new List<Room>();
             try {
@@ -90,7 +90,7 @@ namespace iab330 {
             }
             return rooms;
         }
-
+        //Gets a room type by the ID
         public Room GetRoom(int id) {
             Room room = new Room();
             try {
@@ -103,7 +103,7 @@ namespace iab330 {
             return room;
         }
 
-
+        //Gets the room type by name
         public Room GetRoom(string name) {
             Room room = new Room();
             try {
@@ -116,7 +116,7 @@ namespace iab330 {
             return room;
         }
         
-        //U
+        //Updates room
         public bool UpdateRoom(Room room) {
             bool isSuccessful = false;
             try {
@@ -130,7 +130,7 @@ namespace iab330 {
             return isSuccessful;
         }
 
-        //D
+        //Deletes room with specified room name
         public bool DeleteRoom(Room room) {
             bool isSuccessful = false;
             var id = room.Id;

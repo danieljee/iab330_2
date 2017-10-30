@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace iab330 {
     [Table("Room")]
+    // Sets model variables for Room
     public class Room {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }

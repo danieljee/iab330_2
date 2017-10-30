@@ -24,29 +24,14 @@ namespace iab330.ViewModels {
         private string _boxToBeEditedName;
         private string _boxToBeEditedRoomName;
         private ObservableCollection<Item> _boxToBeEditedItems;
-        /*
-         * At the moment, this is the only way to get a collection of boxes with Room property referencing rooms.
-         * When an element is loaded into memory either through database.get method or query, 
-         * A property that needs to reference another model is set to null (no recursive retrival).
-         * RoomDataAccess's getAllRooms function retrieves all rooms by using GetAllWithChildren which will fill Boxes property
-         * Each box in Boxes property will have Room property set. 
-         */
-        //private ObservableCollection<Box> getBoxesFromRooms(ObservableCollection<Room> rooms) {
-        //    ObservableCollection<Box> boxes = new ObservableCollection<Box>();
-        //    foreach (Room room in rooms) {
-        //        foreach (Box box in room.Boxes) {
-        //            boxes.Add(box);
-        //        }
-        //    }
-        //    return boxes;
-        //}
 
         public BoxViewModel() {
             boxDataAccess = DataAccessLocator.BoxDataAccess;
             roomDataAccess = DataAccessLocator.RoomDataAccess;
             itemDataAccess = DataAccessLocator.ItemDataAccess;
             Boxes = boxDataAccess.GetAllBoxes();
-            //Boxes = getBoxesFromRooms(ViewModelLocator.RoomsViewModel.Rooms);
+
+            // Creates a new box and checks that text field and selected room type is not null
             CreateBoxCommand = new Command(
                 () => {
                     Error = "";
@@ -89,7 +74,7 @@ namespace iab330.ViewModels {
                     return true;
                 }
             );
-
+            // Removes a box when called
             RemoveBoxCommand = new Command<Box>(
                 async (box) =>
                 {
@@ -98,26 +83,19 @@ namespace iab330.ViewModels {
                     {
                         Boxes.Remove(box);
                         boxDataAccess.DeleteBox(box);
-                        //May need to improve this
                         ViewModelLocator.ItemViewModel.ItemsToBeEdited = itemDataAccess.GetAllItems();
                     }
                 }
             );
-
+            // Updates a box when called
             UpdateBoxCommand = new Command(
                 () => {
                     if (!string.IsNullOrEmpty(NewBoxName)) {
-                        //Should I prevent duplicate box name?
                         BoxToBeEditedName = NewBoxName;
                         BoxToBeEdited.Name = NewBoxName;
                         boxDataAccess.UpdateBox(BoxToBeEdited);
                     }
 
-                    /*
-                     * After changing the room, will deleting the previous room delete this box even if it has changed?
-                     * test 1: Create a room, then a box, change the box's room then remove the room.
-                     * test 2: Create a room then a box. Exit the app. Change the box's room then remove the room.
-                     */
                     if (SelectedRoom != null && (BoxToBeEdited.Room != SelectedRoom)) {
                         if (SelectedRoom.Boxes == null) {
                             SelectedRoom.Boxes = new List<Box> { BoxToBeEdited };
@@ -138,7 +116,7 @@ namespace iab330.ViewModels {
                     ViewModelLocator.ItemViewModel.ItemsToBeEdited = itemDataAccess.GetAllItems();
                 }
             );
-
+            // Command to send the list of items as text to android using dependency services
             PrintLabelCommand = new Command(
                 () =>
                 {

@@ -25,6 +25,7 @@ namespace iab330.ViewModels {
             this.Rooms = roomDataAccess.GetAllRooms();
             /* Setup an add room command
              * The second lambda function determines if the button should be disabled (if returned false)
+             * Function also checks to see if there are duplicate rooms
              */
             this.AddRoomCommand = new Command(
                 () => {
@@ -49,7 +50,7 @@ namespace iab330.ViewModels {
                     return this.NewRoomName.Length > 0;
                 }
             );
-
+            // Deletes a room type if called
             this.RemoveRoomCommand = new Command<Room>(
                 async (room) => {
                     bool answer = await Application.Current.MainPage.DisplayAlert("Delete Room", "Are you sure you want to delete room?", "Yes", "No");
@@ -67,7 +68,7 @@ namespace iab330.ViewModels {
                     }
                 }
             );
-
+            // Updates room when called
             this.UpdateRoomCommand = new Command(
                 () => {
                     if (!string.IsNullOrEmpty(NewRoomName)) {

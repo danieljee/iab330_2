@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace iab330.Models {
     [Table("Item")]
+    // Sets model variables for Item
     public class Item {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -17,8 +18,6 @@ namespace iab330.Models {
         [NotNull, MaxLength(50)]
         public string Name { get; set; }
         public int Quantity { get; set; }
-
-        //public string BoxName { get; set; }
 
         [ForeignKey(typeof(Box))]
         public int BoxId { get; set; }

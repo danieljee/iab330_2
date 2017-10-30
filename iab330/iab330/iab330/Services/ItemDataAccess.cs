@@ -52,7 +52,7 @@ namespace iab330.Services {
             }
             return itemCollection;
         }
-
+        //Inserts an item based on item object specified
         public bool InsertItem(Item item) {
             bool isSuccessful = false;
             try {
@@ -66,7 +66,7 @@ namespace iab330.Services {
             }
             return isSuccessful;
         }
-
+        // Gets a list of items based on search query
         public List<Item> SearchItem(string query) {
             List<Item> items = new List<Item>();
             try {
@@ -78,7 +78,7 @@ namespace iab330.Services {
             }
             return items;
         }
-
+        // Gets an item by ID
         public Item GetItem(int id) {
             Item items = new Item();
             try {
@@ -92,7 +92,7 @@ namespace iab330.Services {
             return items;
         }
 
-
+        // Gets an item based on item name
         public Item GetItem(string name) {
             Item item = new Item();
             try {
@@ -105,7 +105,7 @@ namespace iab330.Services {
             }
             return item;
         }
-
+        // Updates the item
         public bool UpdateItem(Item item) {
             bool isSuccessful = false;
             try {
@@ -120,7 +120,7 @@ namespace iab330.Services {
             return isSuccessful;
         }
 
-        //D
+        //Deletes an item of item object specified
         public bool DeleteItem(Item item) {
             bool isSuccessful = false;
             var id = item.Id;
